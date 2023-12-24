@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        .email-container img {
+            max-width: 50%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .email-container h1 {
+            color: #444;
+        }
+        .email-container p {
+            margin-bottom: 10px;
+        }
+        .movie-details {
+            text-align: left;
+            margin-top: 20px;
+        }
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.8em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <img src="{{movieImageUrl}}" alt="Movie Image">
+        <h1>Booking Confirmation</h1>
+        <p>Dear {{userName}},</p>
+        <div class="movie-details">
+            <p><strong>Movie:</strong> {{movieName}}</p>
+            <p><strong>Show Time:</strong> {{showTime}}</p>
+            <p><strong>Seats:</strong> {{seats}}</p>
+            <p><strong>Total Price:</strong> ${{totalPrice}}</p>
+        </div>
+        <div class="footer">
+            <p>If you have any questions, please contact us at support@cine-magic.com.</p>
+        </div>
+    </div>
+</body>
+</html>

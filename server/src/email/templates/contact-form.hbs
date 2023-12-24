@@ -1,0 +1,42 @@
+<html>
+<head>
+  <title>Contact Form Submission</title>
+  <style>
+    .email-container {
+      text-align: center;
+      margin: 20px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+    }
+    .contact-details {
+      font-weight: normal;
+      color: #333;
+      font-size: 18px;
+      margin-top: 20px;
+    }
+    .contact-message {
+      margin-top: 20px;
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class='email-container'>
+    <h1>Contact Form Submission</h1>
+    <p>Dear {{name}},</p>
+    <p>Thank you for reaching out to us. Here are the details of your submission:</p>
+    <div class='contact-details'>
+      <p>Email: {{email}}</p>
+      <p>Phone: {{mobileNumber}}</p>
+    </div>
+    <div class='contact-message'>
+      <p>Message:</p>
+      <p>{{message}}</p>
+    </div>
+    <p>We will get back to you shortly.</p>
+  </div>
+</body>
+</html>
