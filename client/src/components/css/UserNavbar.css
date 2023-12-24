@@ -1,0 +1,187 @@
+.user-navbar {  
+  background: rgba(16, 15, 15);
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.user-navbar .navbar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  max-width: 1500px;
+}
+
+.user-navbar .navbar-logo {
+  color: #fff;
+  justify-self: start;
+  margin-left: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.user-navbar #faFilm {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  font-size: 1.8rem;
+}
+
+.user-navbar .nav-menu {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-gap: 10px;
+  list-style: none;
+  text-align: center;
+  width: 60vw;
+  justify-content: end;
+  margin-right: 2rem;
+}
+
+.user-navbar .nav-item {
+  height: 80px;
+}
+
+.user-navbar .nav-links {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  height: 100%;
+}
+
+.user-navbar .nav-links:hover {
+  border-bottom: 4px solid #fff;
+  transition: all 0.2s ease-out;
+}
+
+.user-navbar #id-faBars {
+  color: #fff;
+}
+
+.user-navbar .nav-links-mobile {
+  display: none;
+}
+
+.user-navbar .menu-icon {
+  display: none;
+}
+
+.user-navbar .icon-link .user-icon {
+  transition: transform 0.3s ease;   
+  color: white;
+}
+
+.user-navbar .icon-link:hover .user-icon {
+  transform: scale(1.4); 
+}
+
+
+@media screen and (max-width: 960px) {
+  .user-navbar .NavbarItems {
+    position: relative;
+  }
+
+  .user-navbar .nav-menu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 90vh;
+    position: absolute;
+    top: 80px;
+    left: -100%;
+    opacity: 1;
+    transition: all 0.5s ease;
+  }
+
+  .user-navbar .nav-menu.active {
+    background: #242222;
+    left: 0;
+    opacity: 1;
+    transition: all 0.5s ease;
+    z-index: 1;
+  }
+
+  .user-navbar .nav-item {
+  height: 150px;
+  font-size: 1.5rem;
+  }
+
+  .user-navbar .nav-links {
+    text-align: center;
+    padding: 4rem;
+    width: 100%;
+    display: table;
+  }
+
+  .user-navbar .nav-links:hover {
+    background-color: #fff;
+    color: #242424;
+    border-radius: 0;
+  }
+
+  .user-navbar .navbar-logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(25%, 50%);
+  }
+
+  .user-navbar .menu-icon {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-100%, 60%);
+    font-size: 1.8rem;
+    cursor: pointer;
+  }
+
+  .user-navbar #id-faTimes {
+    color: #fff;
+    font-size: 2rem;
+  }
+
+  .user-navbar .nav-links-mobile {
+    display: block;
+    text-align: center;
+    margin: 1rem auto;
+    border-radius: 4px;
+    width: 80%;
+    text-decoration: none;
+    font-size: 1.5rem;
+    background-color: transparent;
+    color: #fff;
+    padding: 14px 20px;
+    border: 1px solid #fff;
+    transition: all 0.3s ease-out;
+  }
+
+  .user-navbar .nav-links-mobile:hover {
+    background: #fff;
+    color: #242424;
+    transition: 250ms;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .user-navbar .nav-item {
+    height: 150px;
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .user-navbar .nav-menu {
+    height: 70vh;
+  }
+}

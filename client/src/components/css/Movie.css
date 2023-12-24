@@ -1,0 +1,138 @@
+.movie-page {
+  width: 100%;
+  height: auto;
+}
+
+.movie-cover {
+  width: 100%;
+  height: 100vh;
+  /* background-image: url('/images/aquaman-cover.png'); */
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.movie-info {
+  text-align: left;
+  color: white;
+  padding: 20px;
+}
+
+.movie-title {
+  font-size: 2.3em;
+  margin-bottom: 20px;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  /* Adds a dark shadow for contrast */
+}
+
+.movie-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.movie-action {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  font-size: 17px;
+}
+
+/* .movie-small-text:hover {
+    color: #F6C20A;
+    border: 1px solid red;
+} */
+
+.movie-action .icon {
+  font-size: 24px;
+  /* Adjust as needed */
+  margin-right: 10px;
+}
+
+.movie-details {
+  font-family: "Arial", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  padding-top: 40px;
+  background-color: #fafafa;
+}
+
+.movie-details h2 {
+  font-size: 1.7em;
+  margin-bottom: 15px;
+  letter-spacing: 2px;
+  font-weight: 200;
+}
+
+.storyline,
+.cast,
+.team {
+  width: 100%;
+  max-width: 800px;
+  /* Adjust the width as needed */
+}
+
+.movie-des-p {
+  padding-bottom: 20px;
+}
+
+.storyline p,
+.genres span,
+.cast-table div,
+.team-table div {
+  margin-bottom: 10px;
+  font-weight: 100;
+}
+
+.genres,
+.cast-table,
+.team-table {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background-color: #000;
+  margin: 20px 0;
+}
+
+.buy-tickets {
+  background-color: #f6c20a;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.buy-tickets:hover {
+  background-color: #003399;
+}
+
+.cast-table div span,
+.team-table div span {
+  display: inline-block;
+  margin-right: 20px;
+  padding-top: 5px;
+}
+
+.cast {
+  margin-bottom: 30px;
+}
+
+/* Add responsive design or additional styling as needed */

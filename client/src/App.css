@@ -1,0 +1,22 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Cinzel', serif;
+}
+.home,
+.about,
+.contact-page {
+  display: flex;
+  height: 90vh;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 100px;
+}
+
+.about-cover, .contact-cover {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}

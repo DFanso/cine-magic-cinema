@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "title": "Deadpool 3",
+        "description": "Deadpool's latest wild adventure.",
+        "image": "/images/deadpool.jpg"
+    },
+    {
+        "id": 2,
+        "title": "Despicable Me 4",
+        "description": "Gru and Minions' new escapades.",
+        "image": "/images/despicable-me.jpg"
+    },
+    {
+        "id": 3,
+        "title": "Joker 2",
+        "description": "Exploring the Joker's dark mind.",
+        "image": "/images/joker.jpg"
+    },
+    {
+        "id": 4,
+        "title": "Gladiator 2",
+        "description": "New challenges in ancient Rome.",
+        "image": "/images/Gladiator-poster.jpg"
+    },
+    {
+        "id": 5,
+        "title": "Kung Fu Panda 4",
+        "description": "Po's greatest martial arts challenge.",
+        "image": "/images/kungfupanda.jpg"
+    },
+    {
+        "id": 6,
+        "title": "Madame Web",
+        "description": "Madame Web's mystical spider-verse journey.",
+        "image": "/images/madameweb.jpg"
+    }
+]

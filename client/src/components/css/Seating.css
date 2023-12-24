@@ -1,0 +1,348 @@
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.seating-showtime {
+    font-size: 1.0em;
+    color: #000;
+    font-weight: 200;
+    margin: 0;
+    padding-right: 10px;
+}
+
+.seating-movie-title {
+    font-size: 1.2em;
+    color: #000;
+    font-weight: 200;
+    margin: 0;
+}
+
+.seating-btn {
+    margin: 5px;
+    padding: 8px 18px;
+    border: 0px solid #d1d1d1;
+    background-color: #f6c20a;
+    cursor: pointer;
+    color: #fafafa;
+
+}
+
+.title-seating-div {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Center the entire content */
+.App {
+    display: flex;
+    justify-content: center;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    gap: 120px;
+
+
+}
+
+/* .aside {
+    padding-left: 120px;
+} */
+
+.seating-aside {
+    max-width: 320px;
+    /* Limit the width of each section */
+}
+
+.seating-aside {
+    text-align: center;
+    padding: 20px;
+}
+
+.seating-aside img {
+    max-width: 100%;
+    height: auto;
+}
+
+.cta {
+    margin-top: 20px;
+}
+
+.cta h2 {
+    font-size: 1.2em;
+}
+
+.cta p {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.cta button {
+    padding: 10px 20px;
+    background-color: #0044CC;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.cta button:hover {
+    background-color: #003399;
+}
+
+
+
+.pay-now-button {
+    margin-top: 20px;
+    background-color: #FF0000;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+
+
+
+
+/* Rest of your component-specific styles */
+.Movies {
+    margin-bottom: 24px;
+}
+
+.Movies {
+    margin-bottom: 24px;
+}
+
+.Movies select {
+    appearance: none;
+    background-color: #FAFAFA;
+    font-size: 14px;
+    margin-left: 12px;
+    border-radius: 4px;
+    padding: 6px 24px;
+}
+
+.ShowCase {
+    margin: 0 0 48px;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #3b3b3b;
+    padding: 12px;
+    border-radius: 4px;
+    color: #7e7e7e;
+}
+
+.ShowCase small {
+    padding-left: 3px;
+}
+
+.seat-seat-tag {
+    display: inline;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.ShowCase li {
+    margin: 0 12px;
+}
+
+.Cinema {
+    margin-bottom: 18px;
+    perspective: 400px;
+
+    display: grid;
+    place-items: center;
+    grid-gap: 24px;
+}
+
+.Cinema .screen {
+    height: 70px;
+    background: white;
+    width: 100%;
+    transform: rotateX(-30deg) scale(1.1);
+    box-shadow: 0 3px 10px 2px;
+}
+
+.Cinema .seats {
+    display: grid;
+    grid-gap: 6px;
+    grid-template-columns: repeat(8, min-content);
+    align-items: center;
+}
+
+.Cinema .seats .seat:nth-of-type(8n + 2) {
+    margin-right: 12px;
+}
+
+.Cinema .seats .seat:nth-of-type(8n + 6) {
+    margin-right: 12px;
+}
+
+.Cinema .seats .seat:not(.occupied):hover,
+.Cinema .seats .seat:not(.occupied):focus {
+    cursor: pointer;
+    background: #c1eac5;
+    transform: scale(1.2);
+}
+
+.Cinema .seats .seat.selected::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 2px;
+    width: 12px;
+    height: 12px;
+    border-radius: 100%;
+    background: transparent;
+    border: 1px solid #7bc47f;
+    animation: show-off 0.8s;
+    visibility: hidden;
+}
+
+@keyframes show-off {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+.seat {
+    display: inline-block;
+    background: #626262;
+    width: 36px;
+    height: 25px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+
+    position: relative;
+    top: 1px;
+}
+
+.seat.selected {
+    background: #7bc47f !important;
+}
+
+.seat.occupied {
+    background: #cfcfcf;
+}
+
+.info .count {
+    color: #7bc47f;
+}
+
+.info .total {
+    color: #7bc47f;
+}
+
+
+
+
+/*------------------------responsive----------------------*/
+
+
+@media (max-width: 767px) {
+    .App {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+
+    }
+
+    .seat {
+
+        width: 20px;
+        height: 15px;
+
+    }
+
+    .Cinema .screen {
+        height: 70px;
+        background: white;
+        width: 70%;
+    }
+
+    .info {
+        padding: 0px 20px;
+        text-align: center;
+    }
+
+    .ShowCase {
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-top: 10px;
+        margin-bottom: 35px;
+
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #3b3b3b;
+        padding: 10px;
+        border-radius: 4px;
+        color: #7e7e7e;
+    }
+
+    .seating-movie-title {
+        margin-top: 35px;
+    }
+
+    .title-seating-div {
+        margin-top: 10px;
+    }
+
+
+    .pay-now-button {
+        margin-bottom: 30px;
+    }
+
+}
+
+
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .App {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+
+    }
+
+    .seat {
+
+        width: 25px;
+        height: 18px;
+
+    }
+
+    .seating-movie-title {
+        margin-top: 35px;
+    }
+
+    .pay-now-button {
+        margin-bottom: 30px;
+    }
+}

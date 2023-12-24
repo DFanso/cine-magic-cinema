@@ -1,0 +1,74 @@
+.about-us {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.title {
+    text-align: left;
+    font-size: 2em;
+    font-weight: bold;
+    color: #555;
+    padding-top: 35px;
+}
+
+
+
+.description {
+    margin-top: 10px;
+    text-align: left;
+
+}
+
+.media-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.feature-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.vision-mission {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.vision,
+.mission {
+    flex: 1;
+    padding: 0 10px;
+    margin-top: 30px;
+}
+
+.vision h2,
+.mission h2 {
+    font-size: 1.5em;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.vision p,
+.mission p {
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+/* Media query for responsive layout */
+@media (max-width: 768px) {
+    .vision-mission {
+        flex-direction: column;
+    }
+
+    .vision,
+    .mission {
+        margin-bottom: 20px;
+    }
+}

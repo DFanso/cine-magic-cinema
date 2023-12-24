@@ -1,0 +1,51 @@
+.user-information {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+}
+
+.user-information h1 {
+  color: black;
+  font-size: 40px;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  width: 30%;
+}
+
+.form-group p {
+  width: 70%;
+  padding: 8px;
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px; 
+  margin-top: 20px; 
+}
+
+.user-information button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.user-information button:hover {
+  background-color: #45a049;
+}

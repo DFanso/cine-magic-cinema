@@ -1,0 +1,34 @@
+[
+    {
+        "id": 1,
+        "title": "Wonka",        
+        "image": "/images/wonka.jpeg",
+        "path": "/movie/65828bea0a57cb0ceb553a8a"
+    },
+    {
+        "id": 2,
+        "title": "Aquaman",        
+        "image": "/images/aqua.jpg"
+    },
+    {
+        "id": 3,
+        "title": "Dunki",        
+        "image": "/images/dunki.jpg"
+    },
+    {
+        "id": 4,
+        "title": "Marvels",        
+        "image": "/images/marvels1.jpg",
+        "path": "/movie/65828c0d0a57cb0ceb553a8f"        
+    },
+    {
+        "id": 5,
+        "title": "Tiger 3",        
+        "image": "/images/tiger.webp"
+    },
+    {
+        "id": 6,
+        "title": "Migration",        
+        "image": "/images/Migration.webp"
+    }
+]

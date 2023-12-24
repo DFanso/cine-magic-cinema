@@ -1,0 +1,197 @@
+.booking-container {
+    display: flex;
+    justify-content: center;
+    /* Centered horizontally */
+    align-items: center;
+    /* Align to the top */
+    padding: 20px 200px;
+    /* 200px left and right padding */
+    font-family: Arial, sans-serif;
+    gap: 20px;
+    background-color: #FAFAFA;
+    /* Add some space between the sections */
+}
+
+.showtimes {
+    max-width: 500px;
+    /* Limit the width of each section */
+}
+
+.aside {
+    max-width: 360px;
+}
+
+.time-select {
+    margin-top: 5px;
+    padding: 8px 15px
+}
+
+/* This wrapper is to contain both sections and center them together */
+.sections-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    /* Align to the top */
+    width: 100%;
+    max-width: 1200px;
+    /* Adjust this value as needed */
+    margin: 0 auto;
+    /* Auto margins for horizontal centering */
+}
+
+.cinema {
+    margin-bottom: 20px;
+}
+
+.showtimes h1 {
+    font-size: 2.9em;
+    color: #000;
+    font-weight: 200;
+    margin-bottom: 30px;
+}
+
+.cinema h2,
+.sessions span {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.sessions-one {
+    margin-top: 30px;
+
+}
+
+.sessions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 20px;
+
+
+}
+
+.sessions span {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.sessions button {
+    margin: 5px;
+    padding: 5px 10px;
+    border: 1px solid #d1d1d1;
+    background-color: #f8f8f8;
+    cursor: pointer;
+}
+
+.sessions button:hover {
+    background-color: #F6C20A;
+    color: white;
+    transition: 1s;
+}
+
+.aside {
+    text-align: center;
+    padding: 20px;
+}
+
+.aside img {
+    max-width: 100%;
+    height: auto;
+}
+
+.cta {
+    margin-top: 20px;
+}
+
+.cta h2 {
+    font-size: 1.2em;
+}
+
+.cta p {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.cta button {
+    padding: 10px 20px;
+    background-color: #0044CC;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.cta button:hover {
+    background-color: #003399;
+}
+
+
+
+/* .showtimes-sec {
+    display: flex;
+    align-items: center;
+
+} */
+
+.showtime-span {
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    margin-right: 11px;
+    font-weight: 500;
+}
+
+
+
+
+.date-dropdown-container {
+    width: 100%;
+    /* Adjust the width as needed */
+}
+
+.date-dropdown-container select {
+    width: 100%;
+    padding: 8px;
+    margin: 0;
+    background: white;
+    color: #333;
+    border: 1px solid #333;
+    border-radius: 0;
+    /* To match the style in the image */
+    appearance: none;
+    /* Remove default arrow icon */
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+
+    appearance: none;
+}
+
+/* For the custom dropdown arrow */
+.date-dropdown-container select::-ms-expand {
+    display: none;
+
+
+}
+
+.date-dropdown-container:after {
+    content: '▼';
+    position: absolute;
+    right: 10px;
+    top: 0;
+    bottom: 0;
+    font-size: 12px;
+    line-height: 34px;
+    /* Center vertically */
+    pointer-events: none;
+}
+
+/* Styling the options */
+.date-dropdown-container select option {
+    padding: 10px;
+}
+
+/* Add custom styles for options that are selected or hovered */
+.date-dropdown-container select option:checked,
+.date-dropdown-container select option:hover {
+    background-color: #007bff;
+    color: white;
+}
