@@ -135,4 +135,94 @@ hr {
   margin-bottom: 30px;
 }
 
-/* Add responsive design or additional styling as needed */
+
+
+
+/* MovieFeedbackForm.css */
+.feedback-section {
+  width: 100%;
+  background: #333;
+}
+
+.feedback-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.feedback-container {
+  max-width: 900px;
+  background: #333;
+  padding: 45px;
+  color: #fff;
+  margin: auto;
+  font-family: Arial, sans-serif;
+  margin-bottom: 30px;
+  margin-top: 20px;
+}
+
+.feedback-container h2 {
+  color: #ffd700;
+  /* Cinemagic theme color */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.feedback-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.feedback-container input[type="text"],
+.feedback-container input[type="email"],
+.feedback-container input[type="tel"],
+.feedback-container textarea {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+.feedback-container textarea {
+  height: 100px;
+}
+
+.feedback-container .feedback-type {
+  margin-bottom: 15px;
+}
+
+.feedback-container .feedback-type label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.feedback-container input[type="radio"],
+.feedback-container input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.feedback-container button {
+  background-color: #ffd700;
+  /* Cinemagic theme color */
+  color: #333;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.feedback-container button:hover {
+  opacity: 0.8;
+}
+
+/* .movie-whole-section {
+  display: grid;
+}
+
+.movie-detail-feedback-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
