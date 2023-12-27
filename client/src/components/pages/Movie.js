@@ -8,12 +8,9 @@ import { useLoading } from "../LoadingContext.js";
 
 function MoviePage() {
   const [movieData, setMovieData] = useState({});
-  const [omdbData, setOmdbData] = useState({});
-
   const { loading, setLoading } = useLoading();
-
   const { id } = useParams();
-  // const tokenExists = localStorage.getItem("token") !== null;
+
   useEffect(() => {
     const fetchMovieData = async () => {
       try {
@@ -26,16 +23,6 @@ function MoviePage() {
         }
         const data = await response.json();
         setMovieData(data);
-
-        const omdbResponse = await fetch(
-          `http://www.omdbapi.com/?&apikey=${process.env.REACT_APP_OMDB_API_KEY
-          }&t=${encodeURIComponent(data.name)}&y=${data.year}`
-        );
-        if (!omdbResponse.ok) {
-          throw new Error(`HTTP error! Status: ${omdbResponse.status}`);
-        }
-        const omdbData = await omdbResponse.json();
-        setOmdbData(omdbData);
       } catch (error) {
         console.error("Error fetching movie data:", error);
       } finally {
@@ -44,15 +31,14 @@ function MoviePage() {
     };
 
     fetchMovieData();
-  }, [id]);
-
+  }, [id, setLoading]);
 
   const [feedback, setFeedback] = useState({
-    name: '',
-    email: '',
-    mobile: '',
-    message: '',
-    type: '',
+    name: "",
+    email: "",
+    mobile: "",
+    message: "",
+    type: "",
   });
 
   const handleChange = (e) => {
@@ -65,7 +51,6 @@ function MoviePage() {
     // Here you would handle the form submission, e.g., sending data to a server
     console.log(feedback);
   };
-
 
   return (
     // {tokenExists ? <UserNavbar /> : <Navigation />}
@@ -104,19 +89,18 @@ function MoviePage() {
       {!loading && (
         <div className="movie-detail-feedback-wrapper">
           <div className="movie-details">
-
             <div className="whole-movie-details">
               <section className="storyline">
                 <h2>DESCRIPTION</h2>
                 <p className="movie-des-p">
-                  {omdbData.Plot || "Description not available"}
+                  {movieData.Plot || "Description not available"}
                 </p>
               </section>
               <section className="cast">
                 <h2>CAST</h2>
                 <div className="cast-table">
-                  {omdbData.Actors ? (
-                    omdbData.Actors.split(", ").map((actor, index) => (
+                  {movieData.Actors ? (
+                    movieData.Actors.split(", ").map((actor, index) => (
                       <div key={index}>
                         <span>{actor}</span>
                       </div>
@@ -131,17 +115,19 @@ function MoviePage() {
                 <div className="team-table">
                   <div>
                     <span>Directed by</span>
-                    <span>{omdbData.Director || "Director not available"}</span>
+                    <span>
+                      {movieData.Director || "Director not available"}
+                    </span>
                   </div>
                   <div>
                     <span>Produced by</span>
                     <span>
-                      {omdbData.Production || "Producers not available"}
+                      {movieData.Production || "Producers not available"}
                     </span>
                   </div>
                   <div>
                     <span>Written by</span>
-                    <span>{omdbData.Writer || "Writers not available"}</span>
+                    <span>{movieData.Writer || "Writers not available"}</span>
                   </div>
                 </div>
               </section>
@@ -152,23 +138,37 @@ function MoviePage() {
             <div className="feedback-container">
               <h2>Movie Feedback</h2>
               <form onSubmit={handleSubmit}>
-                <input type="text" name="name" placeholder="Name" onChange={handleChange} />
-                <input type="email" name="email" placeholder="Email" onChange={handleChange} />
-                <input type="tel" name="mobile" placeholder="Mobile" onChange={handleChange} />
-                <textarea name="message" placeholder="Message" onChange={handleChange}></textarea>
-                <div className="feedback-btn"><button type="submit">Send Request</button></div>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                  onChange={handleChange}
+                />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  onChange={handleChange}
+                />
+                <input
+                  type="tel"
+                  name="mobile"
+                  placeholder="Mobile"
+                  onChange={handleChange}
+                />
+                <textarea
+                  name="message"
+                  placeholder="Message"
+                  onChange={handleChange}
+                ></textarea>
+                <div className="feedback-btn">
+                  <button type="submit">Send Request</button>
+                </div>
               </form>
             </div>
           </div>
 
-
-
-
           <Testimonial />
-
-
-
-
         </div>
       )}
     </div>
