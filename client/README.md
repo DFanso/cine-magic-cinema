@@ -24,7 +24,7 @@ To get started with the Cine Magic frontend on your local machine, follow these 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/cine-magic-frontend.git
+   git clone https://github.com/DFanso/cine-magic-frontend.git
 
 2. Navigate to the project directory:
 
