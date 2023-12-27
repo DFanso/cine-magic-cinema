@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CardItem from "./CardItem";
 import "./css/Cards.css";
-import axios  from "axios";
+import axios from "axios";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -18,17 +18,15 @@ function Cards() {
           `${process.env.REACT_APP_API_PATH}/movies?nowShowing=true`
         );
 
-        
-
         //const data = await response.json();
 
-        console.log(response.data)
+        console.log(response.data);
 
         // Transforming API response to match the cardData format
         const transformedMovies = response.data.map((movie) => ({
           id: movie._id,
           title: movie.name,
-          image: movie.coverImage,
+          image: movie.bannerImage,
           path: `/movie/${movie._id}`,
           // Updated path to include movie ID
         }));
@@ -49,28 +47,10 @@ function Cards() {
     slidesToScroll: 1,
   };
   return (
-    // <div className="cards">
-    //   <h1 id="cards">now showing</h1>
-    //   <div className="cards__container">
-    //     <ul className="cards__items">
-    //       {movies.map((movie) => {
-    //         return (
-    //           <CardItem
-    //             key={movie.id}
-    //             src={movie.image}
-    //             text={movie.title}
-    //             label="Movies"
-    //             path={movie.path}
-    //           />
-    //         );
-    //       })}
-    //     </ul>
-    //   </div>
-    // </div>
     <div className="cards">
       <h1 id="cards">now showing</h1>
       <Slider {...settings}>
-        {Movie.map((item) => (
+        {movies.map((item) => (
           <div key={item.id}>
             <CardItem
               src={item.image}

@@ -7,7 +7,6 @@ function CardItem({ src, text, path, label }) {
   const [loading, setLoading] = useState(true);
   console.log(path);
   useEffect(() => {
-    // Simulate a network request
     setTimeout(() => setLoading(false), 2000);
   }, []);
 
