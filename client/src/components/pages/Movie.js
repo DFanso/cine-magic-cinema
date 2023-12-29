@@ -6,6 +6,58 @@ import Testimonial from "../Testimonial-Section.js";
 import { TailSpin } from "react-loader-spinner";
 import { useLoading } from "../LoadingContext.js";
 
+const MovieFeedbackForm = () => {
+  const [message, setMessage] = useState('');
+  const [rating, setRating] = useState(0);
+  const [hover, setHover] = useState(null);
+
+  const handleFeedbackChange = (event) => {
+    setMessage(event.target.value);
+  };
+
+  const handleFeedbackSubmit = (event) => {
+    event.preventDefault();
+    // Handle the form submission logic
+    console.log({ message, rating });
+  };
+
+  return (
+    <div className="feedback-section">
+      <div className="feedback-container">
+        <h2>Rate this Movie !</h2>
+        <form onSubmit={handleFeedbackSubmit}>
+          <textarea
+            name="message"
+            placeholder="Message"
+            onChange={handleFeedbackChange}
+            value={message}
+          ></textarea>
+          <div className="star-rating">
+            {[...Array(5)].map((_, index) => {
+              const ratingValue = index + 1;
+              return (
+                <span
+                  key={index}
+                  className={`star ${ratingValue <= (hover || rating) ? 'filled' : 'empty'}`}
+                  onMouseEnter={() => setHover(ratingValue)}
+                  onMouseLeave={() => setHover(null)}
+                  onClick={() => setRating(ratingValue)}
+                >
+                  &#9733;
+                </span>
+              );
+            })}
+          </div>
+          <div className="feedback-btn">
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+
 function MoviePage() {
   const [movieData, setMovieData] = useState({});
   const { loading, setLoading } = useLoading();
@@ -13,47 +65,19 @@ function MoviePage() {
 
   useEffect(() => {
     const fetchMovieData = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch(
-          `${process.env.REACT_APP_API_PATH}/movies/${id}`
-        );
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
-        setMovieData(data);
-      } catch (error) {
-        console.error("Error fetching movie data:", error);
-      } finally {
-        setLoading(false);
+      setLoading(true);
+      const response = await fetch(`${process.env.REACT_APP_API_PATH}/movies/${id}`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
+      const data = await response.json();
+      setMovieData(data);
+      setLoading(false);
     };
-
     fetchMovieData();
   }, [id, setLoading]);
 
-  const [feedback, setFeedback] = useState({
-    name: "",
-    email: "",
-    mobile: "",
-    message: "",
-    type: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFeedback({ ...feedback, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Here you would handle the form submission, e.g., sending data to a server
-    console.log(feedback);
-  };
-
   return (
-    // {tokenExists ? <UserNavbar /> : <Navigation />}
     <div className="movie">
       <div
         className="movie-cover"
@@ -133,45 +157,13 @@ function MoviePage() {
               </section>
             </div>
           </div>
-
-          <div className="feedback-section">
-            <div className="feedback-container">
-              <h2>Movie Feedback</h2>
-              <form onSubmit={handleSubmit}>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Name"
-                  onChange={handleChange}
-                />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  onChange={handleChange}
-                />
-                <input
-                  type="tel"
-                  name="mobile"
-                  placeholder="Mobile"
-                  onChange={handleChange}
-                />
-                <textarea
-                  name="message"
-                  placeholder="Message"
-                  onChange={handleChange}
-                ></textarea>
-                <div className="feedback-btn">
-                  <button type="submit">Send Request</button>
-                </div>
-              </form>
-            </div>
-          </div>
-
           <Testimonial />
+          <MovieFeedbackForm />
+
         </div>
       )}
     </div>
   );
 }
+
 export default MoviePage;
