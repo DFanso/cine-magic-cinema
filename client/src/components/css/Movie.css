@@ -158,7 +158,7 @@ hr {
   color: #fff;
   margin: auto;
   font-family: Arial, sans-serif;
-  margin-bottom: 30px;
+
   margin-top: 20px;
 }
 
@@ -215,6 +215,31 @@ hr {
 
 .feedback-container button:hover {
   opacity: 0.8;
+}
+
+.star-rating {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.star {
+  color: #ddd;
+  /* Default color for stars */
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.star.filled {
+  color: orange;
+  /* Color for filled stars */
+}
+
+/* You can add hover effects if you like */
+.star:hover,
+.star:hover~.star {
+  color: lightgrey;
+  /* Color when hovering over a star */
 }
 
 /* .movie-whole-section {
