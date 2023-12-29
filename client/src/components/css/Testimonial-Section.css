@@ -15,10 +15,11 @@
     color: #ffd700; */
     width: 100%;
     max-width: 450px;
-    min-height: 300px;
+    min-height: 250px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     overflow: hidden;
 
 }
@@ -29,7 +30,9 @@
 
 .testimonial-name {
     margin-top: 10px;
+    margin-bottom: 15px;
     font-weight: bold;
+    font-size: 1em;
 }
 
 .testimonial-position {
@@ -44,6 +47,35 @@
     border-radius: 50%;
     margin: 0 auto 10px;
     object-fit: cover;
+}
+
+
+.star-rating {
+    display: flex;
+    justify-content: center;
+    /* Center the stars horizontally */
+    margin: 10px 0;
+    /* Add some space above and below the star rating */
+}
+
+.star {
+    color: #ffd700;
+    /* Gold color for filled stars */
+    font-size: 28px;
+    /* Adjust the size of the stars */
+    margin: 0 4px;
+    /* Space out the stars a little */
+}
+
+.star.filled {
+    color: #ffd700;
+    /* Keep filled stars gold */
+}
+
+.star.empty {
+    color: #ffd700;
+
+    /* Light grey color for empty stars */
 }
 
 
