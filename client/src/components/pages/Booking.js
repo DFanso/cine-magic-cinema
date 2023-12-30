@@ -1,19 +1,49 @@
-import React, { useState } from "react";
-import "../css/Booking.css"; // Make sure to import the CSS file
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import "../css/Booking.css";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
+import { useLoading } from "../LoadingContext.js";
+import { TailSpin } from "react-loader-spinner";
 
 const Booking = () => {
+  const { id } = useParams();
+  const [movieDetails, setMovieDetails] = useState(null);
+  const [showTimes, setShowTimes] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
-  const dates = ["Mon, 18 Dec", "Tue, 19 Dec", "Wed, 20 Dec", "Sun, 31 Dec"];
+  const { loading, setLoading } = useLoading();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const movieResponse = await axios.get(
+          `${process.env.REACT_APP_API_PATH}/movies/${id}`
+        );
+        const showTimesResponse = await axios.get(
+          `${process.env.REACT_APP_API_PATH}/movies/${id}/show-times`
+        );
+
+        setMovieDetails(movieResponse.data);
+        setShowTimes(showTimesResponse.data);
+      } catch (error) {
+        console.error("Error fetching data", error);
+      }
+      setLoading(false);
+      console.log(showTimes);
+    };
+
+    fetchData();
+  }, [id, setLoading]);
 
   const handleChange = (event) => {
     setSelectedDate(event.target.value);
   };
-
   return (
     <div className="booking-container">
       <div className="showtimes">
-        <h1 className="booking-movie-title">AQUAMAN AND THE LOST KINGDOM</h1>
+        <h1 className="booking-movie-title">
+          {movieDetails?.name || "Movie Title"}
+        </h1>
         <div className="cinema">
           <div className="showtimes-sec">
             <span className="showtime-span">SHOWTIMES</span>
@@ -23,15 +53,23 @@ const Booking = () => {
                 value={selectedDate}
                 onChange={handleChange}
               >
-                {dates.map((date, index) => (
-                  <option key={index} value={date}>
-                    {date}
-                  </option>
-                ))}
+                {/* Dynamically generate date options from showTimes */}
+                {showTimes.map((showTime, index) => {
+                  const date = new Date(showTime.date);
+                  const formattedDate = date.toLocaleDateString("en-US", {
+                    weekday: "long",
+                    month: "long",
+                    day: "numeric",
+                  });
+                  return (
+                    <option key={index} value={showTime.date}>
+                      {formattedDate}
+                    </option>
+                  );
+                })}
               </select>
             </div>
           </div>
-          {/* <h2>AQUAMAN AND THE LOST KINGDOM</h2> */}
           <div className="sessions-one sessions gold-class">
             <span>GOLD CLASS</span>
             <Link to="/Seating">
@@ -66,11 +104,23 @@ const Booking = () => {
         </div>
       </div>
       <div className="aside">
-        <img src="/images/Aquaman-portrait-cover.jpg" alt="Aquaman Poster" />
+        {/* Dynamically set the movie poster image */}
+        <img
+          src={movieDetails?.coverImage || "/images/default-movie-poster.jpg"}
+          alt={`${movieDetails?.name} Poster`}
+        />
+
         <div className="cta">
-          <h2>AQUAMAN AND THE LOST KINGDOM (3D)</h2>
+          {/* Dynamically set the movie title and indicate if it's 3D */}
+          <h2>
+            {movieDetails?.name
+              ? `${movieDetails.name} (3D)`
+              : "Movie Title (3D)"}
+          </h2>
           <p>NOW SCREENING</p>
-          <a href="https://youtu.be/UGc5Tzz19UY?si=I-mAbcrD6ZYayemB">
+
+          {/* Dynamically set the trailer URL */}
+          <a href={movieDetails?.trailer || "#"}>
             <button>WATCH TRAILER</button>
           </a>
         </div>
