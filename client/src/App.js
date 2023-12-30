@@ -24,14 +24,16 @@ import UserProfile from "./components/pages/UserProfile";
 import { UserProvider } from "./components/UserContext";
 import NotFound from "./components/pages/NotFound";
 import PaymentSuccess from "./components/pages/PaymentSuccess";
-
+import { useSelector } from "react-redux";
 function App() {
   const tokenExists = localStorage.getItem("token") !== null;
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
   return (
     <LoadingProvider>
       <UserProvider>
         <Router>
-          {tokenExists ? <UserNavbar /> : <Navigation />}
+          {isLoggedIn ? <UserNavbar /> : <Navigation />}
           <Routes>
             <Route path="/" exact Component={Home} />
             <Route path="/about" Component={About} />

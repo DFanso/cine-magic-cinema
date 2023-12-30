@@ -5,12 +5,11 @@ import Cards from "../Cards";
 import SliderSection from "../SliderSection";
 
 function Home() {
-
   return (
-    <>  
+    <>
       <Section />
       <Cards />
-      <SliderSection />      
+      <SliderSection />
     </>
   );
 }

@@ -135,9 +135,6 @@ hr {
   margin-bottom: 30px;
 }
 
-
-
-
 /* MovieFeedbackForm.css */
 .feedback-section {
   width: 100%;
@@ -237,7 +234,7 @@ hr {
 
 /* You can add hover effects if you like */
 .star:hover,
-.star:hover~.star {
+.star:hover ~ .star {
   color: lightgrey;
   /* Color when hovering over a star */
 }

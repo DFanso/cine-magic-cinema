@@ -1,12 +1,12 @@
-.login-container {  
+.login-container {
   background-size: cover;
   background-position: center;
-  height:90vh;
+  height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
-  padding: 2rem 0; 
+  padding: 2rem 0;
   box-sizing: border-box;
 }
 
@@ -15,7 +15,7 @@
   border: 2px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(30px);
-  padding: 30px 50px;  
+  padding: 30px 50px;
 }
 
 .login-container h1 {
@@ -46,8 +46,8 @@
 
 .login-container .forgot {
   font-size: 14.5px;
-  text-align: center;  
-  margin: 1rem;   
+  text-align: center;
+  margin: 1rem;
   margin-bottom: 1.75rem;
 }
 
@@ -111,10 +111,10 @@
 
 .login-container .error {
   color: red;
-  font-size: 1em; 
-  margin-top: 3px; 
+  font-size: 1em;
+  margin-top: 3px;
   text-align: center;
-  display: block; 
+  display: block;
   overflow: hidden;
   height: 1em;
   line-height: 1em;
@@ -130,5 +130,34 @@
   .login-container {
     padding: 1rem 0;
   }
-} 
+}
 
+.login-wrapper {
+  position: relative;
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+}
+
+.loader-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1010;
+}
+
+.blurred {
+  filter: blur(5px);
+}
