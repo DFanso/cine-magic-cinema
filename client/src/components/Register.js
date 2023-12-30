@@ -8,9 +8,11 @@ import { TailSpin } from "react-loader-spinner";
 import { useLoading } from "./LoadingContext.js";
 import { UserContext } from "./UserContext";
 
+import Swal from "sweetalert2";
+
 const Register = () => {
   const { loading, setLoading } = useLoading();
-   const { setUserData } = useContext(UserContext);
+  const { setUserData } = useContext(UserContext);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -69,8 +71,6 @@ const Register = () => {
     setErrors(tempErrors);
     if (!formIsValid) return;
 
-    console.log("Registration Data:", formData);
-
     try {
       setLoading(true);
       // Signup request
@@ -89,13 +89,25 @@ const Register = () => {
         await axios.post(`${process.env.REACT_APP_API_PATH}/auth/otp-req`, {
           Email: formData.email,
         });
+        if (signupResponse.status === 201) {
+          // existing OTP request code
+          Swal.fire({
+            icon: "success",
+            title: "Registration Successful",
+            text: "Please proceed to verify your email",
+          });
+        }
 
         setIsOtpRequested(true);
-        navigate("/otp-request-container"); // Redirect to OTP Request page
+        navigate("/otp-request-container");
       }
     } catch (error) {
       console.error("Registration error", error);
-      // Handle errors here, such as displaying a message to the user
+      Swal.fire({
+        icon: "error",
+        title: "Registration Failed",
+        text: "An error occurred during registration",
+      });
     } finally {
       setLoading(false);
     }
@@ -103,7 +115,7 @@ const Register = () => {
       setUserData({
         firstName: formData.firstName,
         lastName: formData.lastName,
-        email: formData.email,        
+        email: formData.email,
       });
     }
   };
@@ -132,104 +144,113 @@ const Register = () => {
       return () => clearTimeout(timer);
     }
   }, [isOtpRequested, navigate]);
+
   return (
-    <div
-      className="register"
-      style={{
-        backgroundImage: "url('/images/Login.jpg')",
-      }}
-    >
-      {loading ? (
-        <div className="register__loading">
+    <div className={`login-wrapper ${loading ? "blurred" : ""}`}>
+      {loading && (
+        <div className="loader-container">
           <TailSpin color="#00BFFF" height={100} width={100} />
         </div>
-      ) : isOtpRequested ? (
-        <OtpRequest />
-      ) : (
-        <form onSubmit={handleSubmit}>
-          <h1>REGISTER</h1>
-          <div className="input-box">
-            <input
-              ref={firstNameRef}
-              type="text"
-              placeholder="First Name"
-              value={formData.firstName}
-              onChange={(e) =>
-                setFormData({ ...formData, firstName: e.target.value })
-              }
-            />
-            <FaUser className="icon" />
-            {errors.firstName && (
-              <div className="error">{errors.firstName}</div>
-            )}
-          </div>
-          <div className="input-box">
-            <input
-              ref={lastNameRef}
-              type="text"
-              placeholder="Last Name"
-              value={formData.lastName}
-              onChange={(e) =>
-                setFormData({ ...formData, lastName: e.target.value })
-              }
-            />
-            <FaUser className="icon" />
-            {errors.lastName && <div className="error">{errors.lastName}</div>}
-          </div>
-          <div className="input-box">
-            <input
-              ref={emailRef}
-              type="email"
-              placeholder="Email"
-              value={formData.email}
-              onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })
-              }
-            />
-            <FaEnvelope className="icon" />
-            {errors.email && <div className="error">{errors.email}</div>}
-          </div>
-          <div className="input-box">
-            <input
-              ref={passwordRef}
-              type="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={(e) =>
-                setFormData({ ...formData, password: e.target.value })
-              }
-            />
-            <FaLock className="icon" />
-            {errors.password && <div className="error">{errors.password}</div>}
-          </div>
-          <div className="input-box">
-            <input
-              ref={confirmPasswordRef}
-              type="password"
-              placeholder="Confirm Password"
-              value={formData.confirmPassword}
-              onChange={(e) =>
-                setFormData({ ...formData, confirmPassword: e.target.value })
-              }
-            />
-            <FaLock className="icon" />
-            {errors.confirmPassword && (
-              <div className="error">{errors.confirmPassword}</div>
-            )}
-          </div>
-          <button type="submit" className="submit-btn">
-            Register
-          </button>
-          <div className="login-link">
-            <p>
-              already a user?{" "}
-              <Link to="/login-container" className="login-link">
-                login
-              </Link>
-            </p>
-          </div>
-        </form>
       )}
+
+      <div
+        className="register"
+        style={{
+          backgroundImage: "url('/images/Login.jpg')",
+        }}
+      >
+        {isOtpRequested ? (
+          <OtpRequest />
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <h1>REGISTER</h1>
+            <div className="input-box">
+              <input
+                ref={firstNameRef}
+                type="text"
+                placeholder="First Name"
+                value={formData.firstName}
+                onChange={(e) =>
+                  setFormData({ ...formData, firstName: e.target.value })
+                }
+              />
+              <FaUser className="icon" />
+              {errors.firstName && (
+                <div className="error">{errors.firstName}</div>
+              )}
+            </div>
+            <div className="input-box">
+              <input
+                ref={lastNameRef}
+                type="text"
+                placeholder="Last Name"
+                value={formData.lastName}
+                onChange={(e) =>
+                  setFormData({ ...formData, lastName: e.target.value })
+                }
+              />
+              <FaUser className="icon" />
+              {errors.lastName && (
+                <div className="error">{errors.lastName}</div>
+              )}
+            </div>
+            <div className="input-box">
+              <input
+                ref={emailRef}
+                type="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
+              />
+              <FaEnvelope className="icon" />
+              {errors.email && <div className="error">{errors.email}</div>}
+            </div>
+            <div className="input-box">
+              <input
+                ref={passwordRef}
+                type="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={(e) =>
+                  setFormData({ ...formData, password: e.target.value })
+                }
+              />
+              <FaLock className="icon" />
+              {errors.password && (
+                <div className="error">{errors.password}</div>
+              )}
+            </div>
+            <div className="input-box">
+              <input
+                ref={confirmPasswordRef}
+                type="password"
+                placeholder="Confirm Password"
+                value={formData.confirmPassword}
+                onChange={(e) =>
+                  setFormData({ ...formData, confirmPassword: e.target.value })
+                }
+              />
+              <FaLock className="icon" />
+              {errors.confirmPassword && (
+                <div className="error">{errors.confirmPassword}</div>
+              )}
+            </div>
+            <button type="submit" className="submit-btn">
+              Register
+            </button>
+            <div className="login-link">
+              <p>
+                Already a user?{" "}
+                <Link to="/login-container" className="login-link">
+                  Login
+                </Link>
+              </p>
+            </div>
+          </form>
+        )}
+      </div>
     </div>
   );
 };

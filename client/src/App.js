@@ -26,7 +26,6 @@ import NotFound from "./components/pages/NotFound";
 import PaymentSuccess from "./components/pages/PaymentSuccess";
 import { useSelector } from "react-redux";
 function App() {
-  const tokenExists = localStorage.getItem("token") !== null;
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   return (

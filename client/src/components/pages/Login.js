@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { FaUser, FaLock } from "react-icons/fa";
 import axios from "axios";
@@ -8,6 +8,9 @@ import { TailSpin } from "react-loader-spinner";
 import { useLoading } from "../LoadingContext.js";
 import { useDispatch } from "react-redux";
 import { login } from "../actions/authActions";
+import { UserContext } from "../UserContext";
+import Swal from "sweetalert2";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,6 +19,7 @@ const Login = () => {
   const passwordRef = useRef(null);
   const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);
   const dispatch = useDispatch();
+  const { setUserData } = useContext(UserContext);
 
   const { loading, setLoading } = useLoading();
 
@@ -89,7 +93,7 @@ const Login = () => {
     if (validateForm()) {
       try {
         setLoading(true);
-        const response = await axios.post(
+        const loginResponse = await axios.post(
           `${process.env.REACT_APP_API_PATH}/auth/signin`,
           {
             email: email,
@@ -97,23 +101,46 @@ const Login = () => {
           }
         );
 
-        if (response.data && response.data.accessToken) {
-          // Store the token in local storage
-          localStorage.setItem("token", response.data.accessToken);
+        if (loginResponse.data && loginResponse.data.accessToken) {
+          localStorage.setItem("token", loginResponse.data.accessToken);
           setIsLoginSuccessful(true);
-          // Navigate to the home page or other destination
+          dispatch(login());
+
+          const profileResponse = await axios.get(
+            `${process.env.REACT_APP_API_PATH}/users/profile`,
+            {
+              headers: {
+                Authorization: `Bearer ${loginResponse.data.accessToken}`,
+              },
+            }
+          );
+
+          // Set user data in context
+          if (profileResponse.data) {
+            setUserData(profileResponse.data);
+          }
         }
-        dispatch(login());
       } catch (error) {
         console.error("Login error", error);
-        // Handle errors here, such as displaying a message to the user
+        Swal.fire({
+          icon: "error",
+          title: "Failed to login!",
+          text: "Wrong username or password!",
+        });
+        // Handle errors here
       } finally {
+        Swal.fire({
+          icon: "success",
+          title: "Welcome!",
+          text: "You have logged in successfully!",
+        });
         setLoading(false);
       }
     } else {
       console.log("Form has errors.");
     }
   };
+
   return (
     <div className={`login-wrapper ${loading ? "blurred" : ""}`}>
       {loading && (

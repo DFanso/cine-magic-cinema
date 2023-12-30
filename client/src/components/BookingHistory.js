@@ -1,34 +1,60 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./css/BookingHistory.css";
 
 function BookingHistory() {
+  const [bookings, setBookings] = useState([]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    axios
+      .get(`${process.env.REACT_APP_API_PATH}/booking/user`, {
+        headers: headers,
+      })
+      .then((response) => {
+        setBookings(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+        // Handle error here
+      });
+  }, []);
+
   return (
     <div className="booking-history">
       <h1>Booking History</h1>
-      <div className="booking-form-group">
-        <p>date</p>
-        <p>time</p>
-        <p>movie</p>
-        <p>ticket</p>
-        <p>price</p>
-        <p>total</p>
+      <div className="booking-form-group-title">
+        <p>Date</p>
+        <p>Time</p>
+        <p>Movie Name</p>
+        <p>Seats</p>
+        <p>Seat price</p>
+        <p>otal Price</p>
       </div>
-      <div className="booking-form-group">
-        <p>date</p>
-        <p>time</p>
-        <p>movie</p>
-        <p>ticket</p>
-        <p>price</p>
-        <p>total</p>
-      </div>
-      <div className="booking-form-group">
-        <p>date</p>
-        <p>time</p>
-        <p>movie</p>
-        <p>ticket</p>
-        <p>price</p>
-        <p>total</p>
-      </div>
+      {bookings.map((booking, index) => (
+        <div className="booking-form-group" key={index}>
+          <p className="booking-form-group-data">
+            {new Date(booking.movieId.startDate).toLocaleDateString()}
+          </p>
+          <p className="booking-form-group-data">
+            {new Date(booking.movieId.startDate).toLocaleTimeString()}
+          </p>
+          <p className="booking-form-group-data">{booking.movieId.name}</p>
+          <p className="booking-form-group-data">
+            {booking.selectedSeats.join(", ")}
+          </p>
+          <p className="booking-form-group-data">
+            ${(booking.totalPrice / booking.selectedSeats.length).toFixed(2)}
+          </p>
+          <p className="booking-form-group-data">
+            ${booking.totalPrice.toFixed(2)}
+          </p>
+        </div>
+      ))}
     </div>
   );
 }

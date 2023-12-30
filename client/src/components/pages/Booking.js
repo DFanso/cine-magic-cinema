@@ -29,7 +29,6 @@ const Booking = () => {
         console.error("Error fetching data", error);
       }
       setLoading(false);
-      console.log(showTimes);
     };
 
     fetchData();
