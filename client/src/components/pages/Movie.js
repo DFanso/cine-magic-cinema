@@ -120,41 +120,42 @@ function MoviePage() {
               <section className="storyline">
                 <h2>DESCRIPTION</h2>
                 <p className="movie-des-p">
-                  {movieData.Plot || "Description not available"}
+                  {movieData.description || "Description not available"}
                 </p>
               </section>
               <section className="cast">
                 <h2>CAST</h2>
                 <div className="cast-table">
-                  {movieData.Actors ? (
-                    movieData.Actors.split(", ").map((actor, index) => (
-                      <div key={index}>
-                        <span>{actor}</span>
-                      </div>
-                    ))
+                  {movieData.cast ? (
+                    movieData.cast.join(", ")
                   ) : (
                     <div>No cast information available.</div>
                   )}
                 </div>
               </section>
+
               <section className="team">
                 <h2>TEAM</h2>
                 <div className="team-table">
                   <div>
                     <span>Directed by</span>
                     <span>
-                      {movieData.Director || "Director not available"}
+                      {movieData.directedBy || "Director not available"}
                     </span>
                   </div>
                   <div>
                     <span>Produced by</span>
                     <span>
-                      {movieData.Production || "Producers not available"}
+                      {movieData.producedBy || "Producers not available"}
                     </span>
                   </div>
                   <div>
                     <span>Written by</span>
-                    <span>{movieData.Writer || "Writers not available"}</span>
+                    <span>
+                      {movieData.writtenBy
+                        ? movieData.writtenBy.join(", ")
+                        : "Writers not available"}
+                    </span>
                   </div>
                 </div>
               </section>
