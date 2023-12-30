@@ -26,7 +26,7 @@ const ContactPage = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const response = await axios.post(
+      await axios.post(
         `${process.env.REACT_APP_API_PATH}/email/contact`,
         formData
       );

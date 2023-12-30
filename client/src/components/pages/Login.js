@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  createContext,
-  useContext,
-} from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { FaUser, FaLock } from "react-icons/fa";
 import axios from "axios";
@@ -15,6 +9,8 @@ import { useLoading } from "../LoadingContext.js";
 import { useDispatch } from "react-redux";
 import { login } from "../actions/authActions";
 import { UserContext } from "../UserContext";
+import Swal from "sweetalert2";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -106,12 +102,10 @@ const Login = () => {
         );
 
         if (loginResponse.data && loginResponse.data.accessToken) {
-          // Store the token, assuming it's named accessToken
           localStorage.setItem("token", loginResponse.data.accessToken);
           setIsLoginSuccessful(true);
-          dispatch(login()); // Update Redux store if needed
+          dispatch(login());
 
-          // Fetch user profile
           const profileResponse = await axios.get(
             `${process.env.REACT_APP_API_PATH}/users/profile`,
             {
@@ -128,8 +122,18 @@ const Login = () => {
         }
       } catch (error) {
         console.error("Login error", error);
+        Swal.fire({
+          icon: "error",
+          title: "Failed to login!",
+          text: "Wrong username or password!",
+        });
         // Handle errors here
       } finally {
+        Swal.fire({
+          icon: "success",
+          title: "Welcome!",
+          text: "You have logged in successfully!",
+        });
         setLoading(false);
       }
     } else {
