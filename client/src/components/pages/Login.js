@@ -6,7 +6,8 @@ import "../css/Login.css";
 
 import { TailSpin } from "react-loader-spinner";
 import { useLoading } from "../LoadingContext.js";
-
+import { useDispatch } from "react-redux";
+import { login } from "../actions/authActions";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,6 +15,7 @@ const Login = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const [isLoginSuccessful, setIsLoginSuccessful] = useState(false);
+  const dispatch = useDispatch();
 
   const { loading, setLoading } = useLoading();
 
@@ -27,7 +29,7 @@ const Login = () => {
       formIsValid = false;
       tempErrors["email"] = "Email cannot be empty";
       emailRef.current.focus();
-    } else if (!isValidEmail(email)) {      
+    } else if (!isValidEmail(email)) {
       formIsValid = false;
       tempErrors["email"] = "Invalid email format";
       emailRef.current.focus();
@@ -51,7 +53,7 @@ const Login = () => {
     return formIsValid;
   };
 
-  const isValidEmail = (email) => {    
+  const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
@@ -101,6 +103,7 @@ const Login = () => {
           setIsLoginSuccessful(true);
           // Navigate to the home page or other destination
         }
+        dispatch(login());
       } catch (error) {
         console.error("Login error", error);
         // Handle errors here, such as displaying a message to the user
@@ -112,14 +115,18 @@ const Login = () => {
     }
   };
   return (
+    <div className={`login-wrapper ${loading ? "blurred" : ""}`}>
+      {loading && (
+        <div className="loader-container">
+          <TailSpin color="#00BFFF" height={100} width={100} />
+        </div>
+      )}
+
       <div
         className="login-container"
         style={{ backgroundImage: "url('/images/Login.jpg')" }}
       >
-        {loading ? (
-          // Display the loading spinner when loading is true
-          <TailSpin type="TailSpin" color="#00BFFF" height={100} width={100} />
-        ) : isLoginSuccessful ? (
+        {isLoginSuccessful ? (
           <LoginSuccessful />
         ) : (
           <form onSubmit={handleSubmit}>
@@ -133,9 +140,7 @@ const Login = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
               <FaUser className="icon" />
-              {errors.email && (
-                <div className="error">{errors.email}</div>
-              )}
+              {errors.email && <div className="error">{errors.email}</div>}
             </div>
             <div className="input-box">
               <input
@@ -167,6 +172,7 @@ const Login = () => {
           </form>
         )}
       </div>
+    </div>
   );
 };
 
