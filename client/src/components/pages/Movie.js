@@ -7,7 +7,7 @@ import { TailSpin } from "react-loader-spinner";
 import { useLoading } from "../LoadingContext.js";
 
 const MovieFeedbackForm = () => {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(null);
 
@@ -38,7 +38,9 @@ const MovieFeedbackForm = () => {
               return (
                 <span
                   key={index}
-                  className={`star ${ratingValue <= (hover || rating) ? 'filled' : 'empty'}`}
+                  className={`star ${
+                    ratingValue <= (hover || rating) ? "filled" : "empty"
+                  }`}
                   onMouseEnter={() => setHover(ratingValue)}
                   onMouseLeave={() => setHover(null)}
                   onClick={() => setRating(ratingValue)}
@@ -57,7 +59,6 @@ const MovieFeedbackForm = () => {
   );
 };
 
-
 function MoviePage() {
   const [movieData, setMovieData] = useState({});
   const { loading, setLoading } = useLoading();
@@ -66,7 +67,9 @@ function MoviePage() {
   useEffect(() => {
     const fetchMovieData = async () => {
       setLoading(true);
-      const response = await fetch(`${process.env.REACT_APP_API_PATH}/movies/${id}`);
+      const response = await fetch(
+        `${process.env.REACT_APP_API_PATH}/movies/${id}`
+      );
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
@@ -89,7 +92,7 @@ function MoviePage() {
           <div className="movie-info">
             <h1 className="movie-title">{movieData.name}</h1>
             <div className="movie-actions">
-              <a href="/booking" className="movie-action">
+              <a href={`/booking/${id}`} className="movie-action">
                 <FaTicketAlt className="icon" />
                 <span className="movie-small-text">
                   Buy <b>Tickets</b> Online
@@ -159,7 +162,6 @@ function MoviePage() {
           </div>
           <Testimonial />
           <MovieFeedbackForm />
-
         </div>
       )}
     </div>
