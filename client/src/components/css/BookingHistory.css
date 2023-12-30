@@ -11,18 +11,26 @@
 }
 
 .booking-form-group {
-  display: flex;  
+  display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;  
-  padding: 15px;  
+  gap: 10px;
+  padding: 15px;
   border: 1px solid grey;
   border-radius: 10px;
   margin: 30px 0;
 }
+.booking-form-group-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 15px;
 
-.booking-form-group p {
-  width: 100%;  
+  margin: 30px 0;
+}
+.booking-form-group-data {
+  width: 100%;
   padding: 5px;
   border-radius: 5px;
   box-shadow: 0 4px 4px rgba(69, 65, 65, 0.8);
@@ -56,25 +64,42 @@
     grid-template-columns: 1fr 1fr; /* Create two columns */
     grid-template-rows: repeat(3, auto); /* Create three rows */
     gap: 5px; /* Adjust the gap between grid cells */
-    align-items: start;    
+    align-items: start;
   }
 
-  .booking-form-group p{
-    border: none;    
+  .booking-form-group p {
+    border: none;
   }
 
   /* Place the first three <p> tags in the left column */
-  .booking-form-group p:nth-child(1) { grid-column: 1; grid-row: 1; }
-  .booking-form-group p:nth-child(2) { grid-column: 1; grid-row: 2; }
-  .booking-form-group p:nth-child(3) { grid-column: 1; grid-row: 3; }
+  .booking-form-group p:nth-child(1) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .booking-form-group p:nth-child(2) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .booking-form-group p:nth-child(3) {
+    grid-column: 1;
+    grid-row: 3;
+  }
 
   /* Place the next three <p> tags in the right column */
-  .booking-form-group p:nth-child(4) { grid-column: 2; grid-row: 1; }
-  .booking-form-group p:nth-child(5) { grid-column: 2; grid-row: 2; }
-  .booking-form-group p:nth-child(6) { grid-column: 2; grid-row: 3; }
+  .booking-form-group p:nth-child(4) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .booking-form-group p:nth-child(5) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .booking-form-group p:nth-child(6) {
+    grid-column: 2;
+    grid-row: 3;
+  }
 
   .booking-history h1 {
     font-size: 35px;
   }
 }
-
