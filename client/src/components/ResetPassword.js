@@ -1,41 +1,57 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import axios from "axios";
 import "./css/ResetPassword.css";
 
+import { TailSpin } from "react-loader-spinner";
+import { useLoading } from "./LoadingContext.js";
+
 const ResetPassword = () => {
+  const [otp, setOtp] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+  const [error, setError] = useState("");
+  const otpRef = useRef(null);
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
   const navigate = useNavigate();
+  const { loading, setLoading } = useLoading();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    setPasswordError("");
+    setError("");
 
-    if (!password) {
-      setPasswordError("Password cannot be empty.");
-      passwordRef.current.focus();
-      return;
-    } else if (!isPasswordStrong(password)) {
-      setPasswordError("Password is weak.");
-      passwordRef.current.focus();
-      setPassword("");
-      return;
-    } else if (!confirmPassword) {
-      setPasswordError("Confirm password cannot be empty.");
-      confirmPasswordRef.current.focus(); 
-      return;
-    } else if (password !== confirmPassword) {
-      setPasswordError("Passwords do not match.");
-      confirmPasswordRef.current.focus(); 
-      setConfirmPassword("");
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      confirmPasswordRef.current.focus();
       return;
     }
 
-    console.log("Password reset successful:", password);
-    navigate("/login-container");
+    if (!isPasswordStrong(password)) {
+      setError("Password is not strong enough.");
+      passwordRef.current.focus();
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_PATH}/auth/reset-password`,
+        {
+          otp,
+          newPassword: password,
+        }
+      );
+      // Handle the response based on your API's specification
+      Swal.fire("Success", "Password has been reset successfully.", "success");
+      navigate("/login-container");
+    } catch (error) {
+      Swal.fire(
+        "Error",
+        "There was a problem resetting the password.",
+        "error"
+      );
+    }
   };
 
   const isPasswordStrong = (password) => {
@@ -54,6 +70,12 @@ const ResetPassword = () => {
   };
 
   return (
+    <div className={`login-wrapper ${loading ? "blurred" : ""}`}>
+      {loading && (
+        <div className="loader-container">
+          <TailSpin color="#00BFFF" height={100} width={100} />
+        </div>
+      )}
       <div
         className="reset-password"
         style={{
@@ -62,6 +84,13 @@ const ResetPassword = () => {
       >
         <form onSubmit={handleSubmit}>
           <h1>Reset Your Password</h1>
+          <input
+            ref={otpRef}
+            type="text"
+            placeholder="OTP Code"
+            value={otp}
+            onChange={(e) => setOtp(e.target.value)}
+          />
           <input
             ref={passwordRef}
             type="password"
@@ -76,10 +105,11 @@ const ResetPassword = () => {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
-          {passwordError && <div className="error">{passwordError}</div>}
+          {error && <div className="error">{error}</div>}
           <button type="submit">Reset Password</button>
         </form>
       </div>
+    </div>
   );
 };
 

@@ -81,6 +81,11 @@ const Login = () => {
     const navigate = useNavigate();
     useEffect(() => {
       const timer = setTimeout(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Welcome!",
+          text: "You have logged in successfully!",
+        });
         navigate("/");
       });
 
@@ -129,11 +134,6 @@ const Login = () => {
         });
         // Handle errors here
       } finally {
-        Swal.fire({
-          icon: "success",
-          title: "Welcome!",
-          text: "You have logged in successfully!",
-        });
         setLoading(false);
       }
     } else {

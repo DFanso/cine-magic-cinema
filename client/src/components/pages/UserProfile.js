@@ -6,14 +6,11 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../UserContext";
 import { useDispatch } from "react-redux";
 import { logout } from "../actions/authActions";
-
+import Swal from "sweetalert2";
 function UserProfile() {
   const [activeSection, setActiveSection] = useState("userProfile");
   const navigate = useNavigate();
-  // Inside your logout function
   const dispatch = useDispatch();
-  // After logging out
-  // Access the UserContext
   const { setUserData } = useContext(UserContext);
 
   const showSection = (section) => {
@@ -21,17 +18,22 @@ function UserProfile() {
   };
 
   const handleLogout = () => {
-    // Clear user data in the context
-    setUserData({});
-
-    // Remove token from localStorage (if needed)
-    localStorage.removeItem("token");
-    // Inside your logout function
-
-    // After logging out
-    dispatch(logout());
-    // Redirect to the home page or login page
-    navigate("/");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, log out!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setUserData({});
+        localStorage.removeItem("token");
+        dispatch(logout());
+        navigate("/");
+      }
+    });
   };
 
   return (
