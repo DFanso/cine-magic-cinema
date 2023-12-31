@@ -21,33 +21,33 @@ const ResetCode = () => {
 
     console.log("Code validated:", code);
 
-    navigate("/reset-password"); 
+    navigate("/reset-password");
   };
 
   const validateCode = (code) => {
-    return code.length === 6; 
+    return code.length === 6;
   };
 
   return (
-      <div
-        className="reset-code"
-        style={{
-          backgroundImage: "url('/images/Login.jpg')",
-        }}
-      >
-        <form onSubmit={handleSubmit}>
-          <h1>Enter Your Code</h1>
-          <input
-            ref={codeRef}
-            type="text"
-            placeholder="Check your email and enter the code"
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
-          />
-          {codeError && <div className="error">{codeError}</div>}
-          <button type="submit">Submit Code</button>
-        </form>
-      </div>
+    <div
+      className="reset-code"
+      style={{
+        backgroundImage: "url('/images/Login.jpg')",
+      }}
+    >
+      <form onSubmit={handleSubmit}>
+        <h1>Enter Your Code</h1>
+        <input
+          ref={codeRef}
+          type="text"
+          placeholder="Check your email and enter the code"
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
+        />
+        {codeError && <div className="error">{codeError}</div>}
+        <button type="submit">Submit Code</button>
+      </form>
+    </div>
   );
 };
 
