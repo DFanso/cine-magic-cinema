@@ -80,7 +80,7 @@ const Booking = () => {
                   <button>10:00 PM</button>
                 </Link>
               </div>
-              <div className="sessions atmos">
+              {/* <div className="sessions atmos">
                 <span>ATMOS</span>
                 <Link to="/seating">
                   <button>11:30 AM</button>
@@ -101,7 +101,7 @@ const Booking = () => {
                     <button>09:45 PM</button>
                   </Link>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="aside">
