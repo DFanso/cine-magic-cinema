@@ -6,8 +6,10 @@ import Testimonial from "../Testimonial-Section.js";
 import { TailSpin } from "react-loader-spinner";
 import { useLoading } from "../LoadingContext.js";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const MovieFeedbackForm = () => {
+  var { id } = useParams();
   const [message, setMessage] = useState("");
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(null);
@@ -16,10 +18,52 @@ const MovieFeedbackForm = () => {
     setMessage(event.target.value);
   };
 
-  const handleFeedbackSubmit = (event) => {
+  const handleFeedbackSubmit = async (event) => {
     event.preventDefault();
-    // Handle the form submission logic
-    console.log({ message, rating });
+
+    const jwtToken = localStorage.getItem("token"); // Replace with your actual key
+
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_PATH}/feedbacks`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwtToken}`,
+          },
+          body: JSON.stringify({
+            movieId: id, // Assuming 'id' is the movie ID from useParams()
+            rating: rating,
+            comment: message,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      // Handle success
+      Swal.fire({
+        title: "Success!",
+        text: "Your feedback has been submitted.",
+        icon: "success",
+        confirmButtonText: "OK",
+      });
+
+      // Optionally reset form or state here
+      setMessage("");
+      setRating(0);
+    } catch (error) {
+      console.error("Error submitting feedback:", error);
+      Swal.fire({
+        title: "Error!",
+        text: "There was a problem submitting your feedback.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    }
   };
 
   return (
@@ -36,12 +80,16 @@ const MovieFeedbackForm = () => {
           <div className="star-rating">
             {[...Array(5)].map((_, index) => {
               const ratingValue = index + 1;
+              let starClass = "empty";
+              if (ratingValue <= rating) {
+                starClass = "filled";
+              } else if (hover && ratingValue <= hover) {
+                starClass = "filled";
+              }
               return (
                 <span
                   key={index}
-                  className={`star ${
-                    ratingValue <= (hover || rating) ? "filled" : "empty"
-                  }`}
+                  className={`star ${starClass}`}
                   onMouseEnter={() => setHover(ratingValue)}
                   onMouseLeave={() => setHover(null)}
                   onClick={() => setRating(ratingValue)}
@@ -51,6 +99,7 @@ const MovieFeedbackForm = () => {
               );
             })}
           </div>
+
           <div className="feedback-btn">
             <button type="submit">Submit</button>
           </div>
@@ -62,22 +111,38 @@ const MovieFeedbackForm = () => {
 
 function MoviePage() {
   const [movieData, setMovieData] = useState({});
+  const [feedbacks, setFeedbacks] = useState([]);
   const { loading, setLoading } = useLoading();
-  const { id } = useParams();
+  var { id } = useParams();
 
   useEffect(() => {
     const fetchMovieData = async () => {
       setLoading(true);
-      const response = await fetch(
-        `${process.env.REACT_APP_API_PATH}/movies/${id}`
-      );
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_API_PATH}/movies/${id}`
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        setMovieData(data);
+
+        const feedbackResponse = await fetch(
+          `${process.env.REACT_APP_API_PATH}/feedbacks/movie/${id}`
+        );
+        if (!feedbackResponse.ok) {
+          throw new Error(`HTTP error! Status: ${feedbackResponse.status}`);
+        }
+        const feedbackData = await feedbackResponse.json();
+        setFeedbacks(feedbackData);
+      } catch (error) {
+        console.error("Error fetching movie data:", error);
+      } finally {
+        setLoading(false);
       }
-      const data = await response.json();
-      setMovieData(data);
-      setLoading(false);
     };
+
     fetchMovieData();
   }, [id, setLoading]);
 
@@ -163,7 +228,7 @@ function MoviePage() {
               </section>
             </div>
           </div>
-          <Testimonial />
+          <Testimonial movieId={id} />
           <MovieFeedbackForm />
         </div>
       )}
