@@ -46,7 +46,7 @@ function App() {
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/movie/:id" element={<MoviePage />} />
             <Route path="/booking/:id" element={<Booking />} />
-            <Route path="/seating" element={<Seating />} />
+            <Route path="/seating/:showTimeId/:id" element={<Seating />} />
             <Route path="/user-profile" element={<UserProfile />} />
             <Route path="/not-found" Component={NotFound} />
             <Route path="/payment-success" Component={PaymentSuccess} />
