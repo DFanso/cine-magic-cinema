@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "../css/Seating.css";
 import clsx from "clsx";
-
+import { useSelector } from "react-redux";
 import { TailSpin } from "react-loader-spinner";
 import { useLoading } from "../LoadingContext.js";
+import { UserContext } from "../UserContext";
 
 export default function Seating() {
   const [selectedSeats, setSelectedSeats] = useState([]);
@@ -15,8 +16,13 @@ export default function Seating() {
   const [seatPrice, setSeatPrice] = useState(0);
   const { id, showTimeId } = useParams();
   const { loading, setLoading } = useLoading();
-
+  const { userData } = useContext(UserContext);
+  const navigate = useNavigate(); // Import useNavigate from react-router-dom
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   useEffect(() => {
+    if (!isLoggedIn) {
+      navigate("/login-container");
+    }
     const fetchData = async () => {
       try {
         setLoading(true);
@@ -48,6 +54,9 @@ export default function Seating() {
   const seats = Array.from({ length: totalSeats }, (_, i) => i + 1);
 
   const totalPrice = selectedSeats.length * seatPrice;
+
+  // Check if userData is empty, and if so, navigate to the login page
+  useEffect(() => {}, [userData, navigate]);
 
   return (
     <div className="App">
@@ -88,6 +97,8 @@ export default function Seating() {
     </div>
   );
 }
+
+// Rest of the component code remains the same
 
 function Movies({ movie, startTime }) {
   return (

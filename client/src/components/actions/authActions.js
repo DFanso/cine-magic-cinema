@@ -1,5 +1,3 @@
-// actions/authActions.js
-
 export const login = () => ({
   type: "LOGIN",
 });

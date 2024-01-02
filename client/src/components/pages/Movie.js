@@ -5,6 +5,7 @@ import "../css/Movie.css";
 import Testimonial from "../Testimonial-Section.js";
 import { TailSpin } from "react-loader-spinner";
 import { useLoading } from "../LoadingContext.js";
+import { Link } from "react-router-dom";
 
 const MovieFeedbackForm = () => {
   const [message, setMessage] = useState("");
@@ -92,12 +93,13 @@ function MoviePage() {
           <div className="movie-info">
             <h1 className="movie-title">{movieData.name}</h1>
             <div className="movie-actions">
-              <a href={`/booking/${id}`} className="movie-action">
+              <Link to={`/booking/${id}`} className="movie-action">
                 <FaTicketAlt className="icon" />
                 <span className="movie-small-text">
                   Buy <b>Tickets</b> Online
                 </span>
-              </a>
+              </Link>
+
               <a
                 href={movieData.trailer}
                 target="_blank"
