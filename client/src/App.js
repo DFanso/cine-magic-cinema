@@ -1,7 +1,12 @@
 import "./App.css";
 import React, { useEffect, useState, useContext } from "react";
-
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+//BrowserRouter
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import axios from "axios";
 import { LoadingProvider } from "./components/LoadingContext";
 
@@ -32,11 +37,29 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { login } from "./components/actions/authActions";
 
+import Swal from "sweetalert2";
+
 function App() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const { setUserData, userData } = useContext(UserContext); // Use setUserData from UserContext
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  function ProtectedRoute({ children }) {
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
+    if (!isLoggedIn) {
+      Swal.fire({
+        title: "Unauthorized Access",
+        text: "You need to log in to access this page",
+        icon: "warning",
+        confirmButtonText: "OK",
+      });
+      // Redirect to the login page if not logged in
+      return <Navigate to="/login-container" />;
+    }
+
+    return children;
+  }
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -87,7 +110,14 @@ function App() {
             <Route path="/movie/:id" element={<MoviePage />} />
             <Route path="/booking/:id" element={<Booking />} />
             <Route path="/seating/:showTimeId/:id" element={<Seating />} />
-            <Route path="/user-profile" element={<UserProfile />} />
+            <Route
+              path="/user-profile"
+              element={
+                <ProtectedRoute>
+                  <UserProfile />
+                </ProtectedRoute>
+              }
+            />
             <Route path="/not-found" Component={NotFound} />
             <Route path="/payment-success" Component={PaymentSuccess} />
           </Routes>
