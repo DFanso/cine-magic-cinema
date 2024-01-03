@@ -32,11 +32,8 @@ export class UsersService {
     return this.userModel.findOne(
       filter,
       Object.keys(this.userModel.schema.obj)
-        .filter((key) => key !== 'password') // Exclude 'password' key
-        .reduce((proj, key) => {
-          proj[key] = 1; // Include all fields except 'password'
-          return proj;
-        }, {}),
+        .map((key) => key)
+        .join(' '),
     );
   }
 
