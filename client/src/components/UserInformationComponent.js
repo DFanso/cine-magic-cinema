@@ -1,14 +1,44 @@
-import React, { useContext } from "react";
-import { UserContext } from "./UserContext";
+import React, { useEffect, useState, useContext } from "react";
+import { useSelector } from "react-redux";
+import axios from "axios";
 import "./css/UserInformationComponent.css";
 
 function UserInformationComponent() {
-  const { userData } = useContext(UserContext);
-  console.log(userData);
+  const [userData, setUserData] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const token = localStorage.getItem("token");
+      if (isLoggedIn && token) {
+        setLoading(true);
+        try {
+          const response = await axios.get(
+            `${process.env.REACT_APP_API_PATH}/users/profile`,
+            { headers: { Authorization: `Bearer ${token}` } }
+          );
+          setUserData(response.data);
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+          setError("Failed to fetch user data.");
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchUserData();
+  }, [isLoggedIn]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
   return (
     <div className="user-information">
       <form>
-        <h1>user profile</h1>
+        <h1>User Profile</h1>
         <div className="form-group">
           <label htmlFor="firstName">First Name</label>
           <p>{userData.firstName || "First name not set"}</p>
