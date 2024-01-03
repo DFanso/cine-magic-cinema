@@ -1,8 +1,11 @@
 import "./App.css";
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
 
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import axios from "axios";
 import { LoadingProvider } from "./components/LoadingContext";
+
+import { UserProvider, UserContext } from "./components/UserContext";
 
 import Home from "./components/pages/Home";
 import Login from "./components/pages/Login";
@@ -21,17 +24,54 @@ import Navigation from "./components/Navigation";
 import UserNavbar from "./components/UserNavbar";
 import Footer from "./components/Footer";
 import UserProfile from "./components/pages/UserProfile";
-import { UserProvider } from "./components/UserContext";
+
 import NotFound from "./components/pages/NotFound";
 import PaymentSuccess from "./components/pages/PaymentSuccess";
+import { useSelector } from "react-redux";
+
+import { useDispatch } from "react-redux";
+import { login } from "./components/actions/authActions";
 
 function App() {
-  const tokenExists = localStorage.getItem("token") !== null;
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const { setUserData, userData } = useContext(UserContext); // Use setUserData from UserContext
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        try {
+          const profileResponse = await axios.get(
+            `${process.env.REACT_APP_API_PATH}/users/profile`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`, // Use the token from localStorage
+              },
+            }
+          );
+
+          if (profileResponse.data) {
+            setUserData(profileResponse.data); // Update with actual data
+            dispatch(login());
+            setIsUserLoggedIn(true); // Set logged in state to true
+          }
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+          // Handle error appropriately
+        }
+      }
+    };
+
+    fetchUserData();
+  }, [dispatch, setUserData]);
+
   return (
     <LoadingProvider>
       <UserProvider>
         <Router>
-          {tokenExists ? <UserNavbar /> : <Navigation />}
+          {isLoggedIn ? <UserNavbar /> : <Navigation />}
           <Routes>
             <Route path="/" exact Component={Home} />
             <Route path="/about" Component={About} />
@@ -45,7 +85,7 @@ function App() {
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/movie/:id" element={<MoviePage />} />
             <Route path="/booking/:id" element={<Booking />} />
-            <Route path="/seating" element={<Seating />} />
+            <Route path="/seating/:showTimeId/:id" element={<Seating />} />
             <Route path="/user-profile" element={<UserProfile />} />
             <Route path="/not-found" Component={NotFound} />
             <Route path="/payment-success" Component={PaymentSuccess} />

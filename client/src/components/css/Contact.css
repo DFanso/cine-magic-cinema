@@ -1,110 +1,137 @@
 .contact-page-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 90vh;
-    /* Full viewport height */
-    padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  /* Full viewport height */
+  padding: 20px;
 }
 
 .contact-container {
-    width: 100%;
-    max-width: 1200px;
-    /* or whatever max-width you prefer */
-    background-color: #fff;
-    /* or any other background color */
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    /* Optional shadow for better visibility */
-    border-radius: 8px;
-    /* Optional border radius for rounded corners */
-    overflow: hidden;
-    /* Ensures the child elements are contained within the border-radius */
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    /* Align items to the start of the flex container */
+  width: 100%;
+  max-width: 1200px;
+  /* or whatever max-width you prefer */
+  background-color: #fff;
+  /* or any other background color */
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* Optional shadow for better visibility */
+  border-radius: 8px;
+  /* Optional border radius for rounded corners */
+  overflow: hidden;
+  /* Ensures the child elements are contained within the border-radius */
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  /* Align items to the start of the flex container */
 }
 
 .contact-form,
 .contact-info {
-    flex: 1;
-    padding-left: 40px;
-
+  flex: 1;
+  padding-left: 40px;
 }
 
 .contact-form h2 {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .input-group {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .input-group label {
-    display: block;
-    margin-bottom: 5px;
+  display: block;
+  margin-bottom: 5px;
 }
 
 .input-group input,
 .input-group textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 0px solid #C5C5C5;
-    border-radius: 4px;
-    background-color: #D6D6D6;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 0px solid #c5c5c5;
+  border-radius: 4px;
+  background-color: #d6d6d6;
 }
 
 .contact-btn {
-    margin: 5px;
-    padding: 8px 18px;
-    border: 0px solid #d1d1d1;
-    background-color: #f6c20a;
-    cursor: pointer;
-    color: #fafafa;
+  margin: 5px;
+  padding: 8px 18px;
+  border: 0px solid #d1d1d1;
+  background-color: #f6c20a;
+  cursor: pointer;
+  color: #fafafa;
 }
 
 .contact-btn-div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 input[type="submit"] {
-    background-color: #0056b3;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+  background-color: #0056b3;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 input[type="submit"]:hover {
-    background-color: #003d82;
+  background-color: #003d82;
 }
 
 .info-section {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 .info-section h3 {
-    color: #333;
-    margin-bottom: 10px;
+  color: #333;
+  margin-bottom: 10px;
 }
 
 /* Adjustments for mobile view */
 @media (max-width: 768px) {
-    .contact-container {
-        flex-direction: column;
-    }
+  .contact-container {
+    flex-direction: column;
+  }
 
-    .contact-form,
-    .contact-info {
-        width: 100%;
-    }
+  .contact-form,
+  .contact-info {
+    width: 100%;
+  }
 
-    input[type="submit"] {
-        width: 100%;
-    }
+  input[type="submit"] {
+    width: 100%;
+  }
+}
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: absolute;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+}
+
+.loader-container {
+  position: fixed; /* Use fixed positioning */
+  top: 50%; /* Position the top edge of the element in the middle of the screen */
+  left: 50%; /* Position the left edge of the element in the middle of the screen */
+  transform: translate(
+    -50%,
+    -50%
+  ); /* Shift the element left and up by half its width and height */
+  z-index: 1010; /* Ensure it's above other content */
+}
+
+.blurred {
+  filter: blur(5px);
 }

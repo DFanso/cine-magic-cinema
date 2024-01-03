@@ -5,8 +5,11 @@ import "../css/Movie.css";
 import Testimonial from "../Testimonial-Section.js";
 import { TailSpin } from "react-loader-spinner";
 import { useLoading } from "../LoadingContext.js";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const MovieFeedbackForm = () => {
+  var { id } = useParams();
   const [message, setMessage] = useState("");
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(null);
@@ -15,10 +18,52 @@ const MovieFeedbackForm = () => {
     setMessage(event.target.value);
   };
 
-  const handleFeedbackSubmit = (event) => {
+  const handleFeedbackSubmit = async (event) => {
     event.preventDefault();
-    // Handle the form submission logic
-    console.log({ message, rating });
+
+    const jwtToken = localStorage.getItem("token"); // Replace with your actual key
+
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_PATH}/feedbacks`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwtToken}`,
+          },
+          body: JSON.stringify({
+            movieId: id, // Assuming 'id' is the movie ID from useParams()
+            rating: rating,
+            comment: message,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      // Handle success
+      Swal.fire({
+        title: "Success!",
+        text: "Your feedback has been submitted.",
+        icon: "success",
+        confirmButtonText: "OK",
+      });
+
+      // Optionally reset form or state here
+      setMessage("");
+      setRating(0);
+    } catch (error) {
+      console.error("Error submitting feedback:", error);
+      Swal.fire({
+        title: "Error!",
+        text: "There was a problem submitting your feedback.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    }
   };
 
   return (
@@ -35,12 +80,16 @@ const MovieFeedbackForm = () => {
           <div className="star-rating">
             {[...Array(5)].map((_, index) => {
               const ratingValue = index + 1;
+              let starClass = "empty";
+              if (ratingValue <= rating) {
+                starClass = "filled";
+              } else if (hover && ratingValue <= hover) {
+                starClass = "filled";
+              }
               return (
                 <span
                   key={index}
-                  className={`star ${
-                    ratingValue <= (hover || rating) ? "filled" : "empty"
-                  }`}
+                  className={`star ${starClass}`}
                   onMouseEnter={() => setHover(ratingValue)}
                   onMouseLeave={() => setHover(null)}
                   onClick={() => setRating(ratingValue)}
@@ -50,6 +99,7 @@ const MovieFeedbackForm = () => {
               );
             })}
           </div>
+
           <div className="feedback-btn">
             <button type="submit">Submit</button>
           </div>
@@ -61,22 +111,38 @@ const MovieFeedbackForm = () => {
 
 function MoviePage() {
   const [movieData, setMovieData] = useState({});
+  const [feedbacks, setFeedbacks] = useState([]);
   const { loading, setLoading } = useLoading();
-  const { id } = useParams();
+  var { id } = useParams();
 
   useEffect(() => {
     const fetchMovieData = async () => {
       setLoading(true);
-      const response = await fetch(
-        `${process.env.REACT_APP_API_PATH}/movies/${id}`
-      );
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_API_PATH}/movies/${id}`
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        setMovieData(data);
+
+        const feedbackResponse = await fetch(
+          `${process.env.REACT_APP_API_PATH}/feedbacks/movie/${id}`
+        );
+        if (!feedbackResponse.ok) {
+          throw new Error(`HTTP error! Status: ${feedbackResponse.status}`);
+        }
+        const feedbackData = await feedbackResponse.json();
+        setFeedbacks(feedbackData);
+      } catch (error) {
+        console.error("Error fetching movie data:", error);
+      } finally {
+        setLoading(false);
       }
-      const data = await response.json();
-      setMovieData(data);
-      setLoading(false);
     };
+
     fetchMovieData();
   }, [id, setLoading]);
 
@@ -92,12 +158,13 @@ function MoviePage() {
           <div className="movie-info">
             <h1 className="movie-title">{movieData.name}</h1>
             <div className="movie-actions">
-              <a href={`/booking/${id}`} className="movie-action">
+              <Link to={`/booking/${id}`} className="movie-action">
                 <FaTicketAlt className="icon" />
                 <span className="movie-small-text">
                   Buy <b>Tickets</b> Online
                 </span>
-              </a>
+              </Link>
+
               <a
                 href={movieData.trailer}
                 target="_blank"
@@ -120,47 +187,48 @@ function MoviePage() {
               <section className="storyline">
                 <h2>DESCRIPTION</h2>
                 <p className="movie-des-p">
-                  {movieData.Plot || "Description not available"}
+                  {movieData.description || "Description not available"}
                 </p>
               </section>
               <section className="cast">
                 <h2>CAST</h2>
                 <div className="cast-table">
-                  {movieData.Actors ? (
-                    movieData.Actors.split(", ").map((actor, index) => (
-                      <div key={index}>
-                        <span>{actor}</span>
-                      </div>
-                    ))
+                  {movieData.cast ? (
+                    movieData.cast.join(", ")
                   ) : (
                     <div>No cast information available.</div>
                   )}
                 </div>
               </section>
+
               <section className="team">
                 <h2>TEAM</h2>
                 <div className="team-table">
                   <div>
                     <span>Directed by</span>
                     <span>
-                      {movieData.Director || "Director not available"}
+                      {movieData.directedBy || "Director not available"}
                     </span>
                   </div>
                   <div>
                     <span>Produced by</span>
                     <span>
-                      {movieData.Production || "Producers not available"}
+                      {movieData.producedBy || "Producers not available"}
                     </span>
                   </div>
                   <div>
                     <span>Written by</span>
-                    <span>{movieData.Writer || "Writers not available"}</span>
+                    <span>
+                      {movieData.writtenBy
+                        ? movieData.writtenBy.join(", ")
+                        : "Writers not available"}
+                    </span>
                   </div>
                 </div>
               </section>
             </div>
           </div>
-          <Testimonial />
+          <Testimonial movieId={id} />
           <MovieFeedbackForm />
         </div>
       )}
