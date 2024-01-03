@@ -46,7 +46,7 @@ function BookingHistory() {
             {new Date(booking.movieId.startDate).toLocaleDateString()}
           </p>
           <p className="booking-form-group-data">
-            {convertTo12HourFormat(booking.showTimeId.startTime)}
+            {convertTo12HourFormat(booking.movieId.showTimeId.startTime)}
           </p>
           <p className="booking-form-group-data">{booking.movieId.name}</p>
           <p className="booking-form-group-data">
