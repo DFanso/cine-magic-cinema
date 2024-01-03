@@ -64,7 +64,8 @@
   align-items: center;
   padding: 20px;
   padding-top: 40px;
-  background-color: #fafafa;
+  background-color: #333;
+  color: #fff;
 }
 
 .movie-details h2 {
@@ -156,7 +157,7 @@ hr {
   margin: auto;
   font-family: Arial, sans-serif;
 
-  margin-top: 20px;
+  padding-top: 40px;
 }
 
 .feedback-container h2 {
@@ -220,24 +221,19 @@ hr {
   cursor: pointer;
 }
 
-.star {
-  color: #ddd;
-  /* Default color for stars */
-  font-size: 25px;
+.feedback-star {
   cursor: pointer;
+  font-size: 25px;
+  /* Adjust the size of the stars */
+  color: grey;
+  /* Color for unselected stars */
 }
 
-.star.filled {
-  color: orange;
-  /* Color for filled stars */
+.feedback-star.filled {
+  color: #ffd700;
+  /* Color for selected stars */
 }
 
-/* You can add hover effects if you like */
-.star:hover,
-.star:hover ~ .star {
-  color: lightgrey;
-  /* Color when hovering over a star */
-}
 
 /* .movie-whole-section {
   display: grid;

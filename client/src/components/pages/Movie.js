@@ -89,7 +89,7 @@ const MovieFeedbackForm = () => {
               return (
                 <span
                   key={index}
-                  className={`star ${starClass}`}
+                  className={`feedback-star ${starClass}`}
                   onMouseEnter={() => setHover(ratingValue)}
                   onMouseLeave={() => setHover(null)}
                   onClick={() => setRating(ratingValue)}
