@@ -34,7 +34,7 @@ const ForgotPassword = () => {
       );
       // Handle the response based on your API's specification
 
-      navigate("/reset-password");
+      navigate(`/reset-password/${email}`);
       Swal.fire(
         "Success",
         "OTP request has been sent successfully.",
