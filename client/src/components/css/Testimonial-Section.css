@@ -1,12 +1,15 @@
 .testimonial-section {
     width: 100%;
     padding: 20px;
-    margin-top: 30px;
-    margin-bottom: 10px;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    background-color: #333;
 }
 
 .testimonial-card {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #444;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     margin: 0 15px;
     padding: 20px;
     text-align: center;
@@ -58,24 +61,15 @@
     /* Add some space above and below the star rating */
 }
 
-.star {
+.star-rating .star,
+.star-rating .star:hover {
     color: #ffd700;
-    /* Gold color for filled stars */
-    font-size: 28px;
-    /* Adjust the size of the stars */
-    margin: 0 4px;
-    /* Space out the stars a little */
-}
-
-.star.filled {
-    color: #ffd700;
-    /* Keep filled stars gold */
-}
-
-.star.empty {
-    color: #ffd700;
-
-    /* Light grey color for empty stars */
+    /* Keep the stars yellow */
+    background-color: transparent;
+    /* Prevent any background changes */
+    pointer-events: none;
+    font-size: 25px;
+    /* Prevents any mouse events on the stars */
 }
 
 

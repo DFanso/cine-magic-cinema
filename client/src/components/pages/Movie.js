@@ -12,7 +12,7 @@ const MovieFeedbackForm = () => {
   var { id } = useParams();
   const [message, setMessage] = useState("");
   const [rating, setRating] = useState(0);
-  const [hover, setHover] = useState(null);
+  const [hover, setHover] = useState(0); 
 
   const handleFeedbackChange = (event) => {
     setMessage(event.target.value);
@@ -77,29 +77,22 @@ const MovieFeedbackForm = () => {
             onChange={handleFeedbackChange}
             value={message}
           ></textarea>
-          <div className="star-rating">
+           <div className="star-rating">
             {[...Array(5)].map((_, index) => {
               const ratingValue = index + 1;
-              let starClass = "empty";
-              if (ratingValue <= rating) {
-                starClass = "filled";
-              } else if (hover && ratingValue <= hover) {
-                starClass = "filled";
-              }
               return (
                 <span
                   key={index}
-                  className={`star ${starClass}`}
+                  className={`feedback-star ${ratingValue <= (hover || rating) ? "filled" : "empty"}`}
                   onMouseEnter={() => setHover(ratingValue)}
-                  onMouseLeave={() => setHover(null)}
+                  onMouseLeave={() => setHover(rating)}
                   onClick={() => setRating(ratingValue)}
                 >
-                  &#9733;
+                  &#9733; {/* This is the HTML entity for a star character */}
                 </span>
               );
             })}
           </div>
-
           <div className="feedback-btn">
             <button type="submit">Submit</button>
           </div>
