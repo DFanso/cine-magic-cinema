@@ -4,6 +4,7 @@ import "./css/UserInformationComponent.css";
 
 function UserInformationComponent() {
   const { userData } = useContext(UserContext);
+  console.log(userData);
   return (
     <div className="user-information">
       <form>
@@ -19,7 +20,7 @@ function UserInformationComponent() {
         <div className="form-group">
           <label htmlFor="email">Email</label>
           <p>{userData.email || "Email not set"}</p>
-        </div>        
+        </div>
         <div className="button-container">
           <a href="/forgot-password">
             <button type="button">Reset Password</button>
