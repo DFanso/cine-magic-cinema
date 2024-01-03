@@ -4,7 +4,12 @@ import "./css/BookingHistory.css";
 
 function BookingHistory() {
   const [bookings, setBookings] = useState([]);
-
+  const convertTo12HourFormat = (time24) => {
+    const [hours, minutes] = time24.split(":");
+    const hours12 = hours % 12 || 12;
+    const amPm = hours < 12 ? "AM" : "PM";
+    return `${hours12}:${minutes} ${amPm}`;
+  };
   useEffect(() => {
     const token = localStorage.getItem("token");
     const headers = {
@@ -41,7 +46,7 @@ function BookingHistory() {
             {new Date(booking.movieId.startDate).toLocaleDateString()}
           </p>
           <p className="booking-form-group-data">
-            {new Date(booking.movieId.startDate).toLocaleTimeString()}
+            {convertTo12HourFormat(booking.showTimeId.startTime)}
           </p>
           <p className="booking-form-group-data">{booking.movieId.name}</p>
           <p className="booking-form-group-data">
