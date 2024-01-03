@@ -106,7 +106,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/otp-request-container" element={<OtpRequest />} />
             <Route path="/reset-code" element={<ResetCode />} />
-            <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/reset-password/:email" element={<ResetPassword />} />
             <Route path="/movie/:id" element={<MoviePage />} />
             <Route path="/booking/:id" element={<Booking />} />
             <Route path="/seating/:showTimeId/:id" element={<Seating />} />
