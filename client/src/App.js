@@ -42,6 +42,7 @@ function App() {
     const fetchUserData = async () => {
       const token = localStorage.getItem("token");
       if (token) {
+        console.log(token);
         try {
           const profileResponse = await axios.get(
             `${process.env.REACT_APP_API_PATH}/users/profile`,
@@ -51,21 +52,21 @@ function App() {
               },
             }
           );
+          setUserData(profileResponse.data);
 
+          // Assuming profileResponse.data contains the user object
           if (profileResponse.data) {
-            setUserData(profileResponse.data); // Update with actual data
             dispatch(login());
             setIsUserLoggedIn(true); // Set logged in state to true
           }
         } catch (error) {
           console.error("Error fetching user data:", error);
-          // Handle error appropriately
         }
       }
     };
 
     fetchUserData();
-  }, [dispatch, setUserData]);
+  }, []);
 
   return (
     <LoadingProvider>
