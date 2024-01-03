@@ -32,7 +32,11 @@ export default function Seating() {
           `${process.env.REACT_APP_API_PATH}/movies/${id}/show-times/${showTimeId}`
         );
         setMovieDetails(response.data.movieId);
-        setBookedSeats(response.data.Seats.bookedSeats);
+        const booked = response.data.Seats.bookedSeats;
+        const temporary = response.data.temporaryReservations
+          .map((reservation) => reservation.seatNumber)
+          .filter(Boolean);
+        setBookedSeats([...new Set([...booked, ...temporary])]); // Combine and remove duplicates
         setStartTime(convertTo12Hour(response.data.startTime));
         setSeatPrice(response.data.price);
         setLoading(false);
@@ -44,7 +48,7 @@ export default function Seating() {
   }, [id, showTimeId]);
 
   const handleBooking = async () => {
-    if (selectedSeats.length === 0) {
+    if (bookedSeats.length === 0) {
       Swal.fire({
         icon: "error",
         title: "Oops...",

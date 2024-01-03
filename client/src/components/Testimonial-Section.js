@@ -14,9 +14,10 @@ const Testimonials = (movieId) => {
         const response = await axios.get(
           `${process.env.REACT_APP_API_PATH}/feedbacks/movie/${movieId.movieId}`
         );
+        console.log(response);
         const formattedTestimonials = response.data.map((item) => ({
           quote: item.comment,
-          name: "Anonymous User", // Replace with user's name if available
+          name: `${item.userId.firstName} ${item.userId.lastName}`, // Replace with user's name if available
           position: "Movie Viewer", // Replace with user's position if available
           rating: item.rating,
         }));
