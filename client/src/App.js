@@ -46,8 +46,8 @@ function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   function ProtectedRoute({ children }) {
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-
-    if (!isLoggedIn) {
+    const token = localStorage.getItem("token");
+    if (!isLoggedIn & token) {
       Swal.fire({
         title: "Unauthorized Access",
         text: "You need to log in to access this page",
