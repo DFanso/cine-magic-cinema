@@ -7,12 +7,15 @@ import { UserContext } from "../UserContext";
 import { useDispatch } from "react-redux";
 import { logout } from "../actions/authActions";
 import Swal from "sweetalert2";
+
+import { TailSpin } from "react-loader-spinner";
+import { useLoading } from "../LoadingContext.js";
 function UserProfile() {
   const [activeSection, setActiveSection] = useState("userProfile");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { setUserData } = useContext(UserContext);
-
+  const { loading, setLoading } = useLoading();
   const showSection = (section) => {
     setActiveSection(section);
   };
@@ -37,16 +40,25 @@ function UserProfile() {
   };
 
   return (
-    <div className="user-profile">
-      <div className="user-profile-links">
-        <button onClick={() => showSection("userProfile")}>User Profile</button>
-        <button onClick={() => showSection("bookingHistory")}>
-          Booking History
-        </button>
-        <button onClick={handleLogout}>Log Out</button>
+    <div className={`login-wrapper ${loading ? "blurred" : ""}`}>
+      {loading && (
+        <div className="loader-container">
+          <TailSpin color="#00BFFF" height={100} width={100} />
+        </div>
+      )}
+      <div className="user-profile">
+        <div className="user-profile-links">
+          <button onClick={() => showSection("userProfile")}>
+            User Profile
+          </button>
+          <button onClick={() => showSection("bookingHistory")}>
+            Booking History
+          </button>
+          <button onClick={handleLogout}>Log Out</button>
+        </div>
+        {activeSection === "userProfile" && <UserInformationComponent />}
+        {activeSection === "bookingHistory" && <BookingHistory />}
       </div>
-      {activeSection === "userProfile" && <UserInformationComponent />}
-      {activeSection === "bookingHistory" && <BookingHistory />}
     </div>
   );
 }
