@@ -47,7 +47,7 @@ function App() {
   function ProtectedRoute({ children }) {
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
     const token = localStorage.getItem("token");
-    if (!isLoggedIn & token) {
+    if (!isLoggedIn & !token) {
       Swal.fire({
         title: "Unauthorized Access",
         text: "You need to log in to access this page",
@@ -119,7 +119,14 @@ function App() {
               }
             />
             <Route path="/not-found" Component={NotFound} />
-            <Route path="/payment-success" Component={PaymentSuccess} />
+            <Route
+              path="/payment-success"
+              element={
+                <ProtectedRoute>
+                  <PaymentSuccess />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
           <Footer />
         </Router>
