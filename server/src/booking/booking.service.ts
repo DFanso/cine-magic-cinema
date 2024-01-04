@@ -4,9 +4,9 @@ import { Model } from 'mongoose';
 import { CreateBookingDto } from './dto/create-booking.dto';
 import { UpdateBookingDto } from './dto/update-booking.dto';
 import { Booking, BookingDocument } from './entities/booking.entity';
-import { ShowTimesService } from 'src/show-times/show-times.service';
-import { PaypalService } from 'src/paypal/paypal.service';
-import { MoviesService } from 'src/movies/movies.service';
+import { ShowTimesService } from '../show-times/show-times.service';
+import { PaypalService } from '../paypal/paypal.service';
+import { MoviesService } from '../movies/movies.service';
 
 @Injectable()
 export class BookingService {
@@ -66,6 +66,25 @@ export class BookingService {
       )
       .populate('userId')
       .populate('movieId')
+      .exec();
+
+    if (bookings.length === 0) {
+      throw new NotFoundException('No booking found matching the criteria');
+    }
+    return bookings;
+  }
+
+  async findAllForUser(filter = {}): Promise<Booking[]> {
+    const bookings = await this.bookingModel
+      .find(
+        filter,
+        Object.keys(this.bookingModel.schema.obj)
+          .map((key) => key)
+          .join(' '),
+      )
+      .populate('userId')
+      .populate('movieId')
+      .populate('showTimeId')
       .exec();
 
     if (bookings.length === 0) {
