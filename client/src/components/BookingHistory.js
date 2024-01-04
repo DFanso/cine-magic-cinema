@@ -19,6 +19,7 @@ function BookingHistory() {
     const headers = {
       Authorization: `Bearer ${token}`,
     };
+    setLoading(true);
 
     axios
       .get(`${process.env.REACT_APP_API_PATH}/booking/user`, {
@@ -31,6 +32,7 @@ function BookingHistory() {
         console.error("Error fetching data: ", error);
         // Handle error here
       });
+    setLoading(false);
   }, []);
 
   return (

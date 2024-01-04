@@ -1,5 +1,7 @@
 import "./App.css";
 import React, { useEffect, useState, useContext } from "react";
+import { useLocation } from 'react-router-dom';
+
 //BrowserRouter
 import {
   BrowserRouter as Router,
@@ -32,6 +34,7 @@ import UserProfile from "./components/pages/UserProfile";
 
 import NotFound from "./components/pages/NotFound";
 import PaymentSuccess from "./components/pages/PaymentSuccess";
+import PaymentCancel from "./components/pages/PaymentCancel";
 import { useSelector } from "react-redux";
 
 import { useDispatch } from "react-redux";
@@ -47,7 +50,7 @@ function App() {
   function ProtectedRoute({ children }) {
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
     const token = localStorage.getItem("token");
-    if (!isLoggedIn & token) {
+    if (!isLoggedIn & !token) {
       Swal.fire({
         title: "Unauthorized Access",
         text: "You need to log in to access this page",
@@ -60,6 +63,17 @@ function App() {
 
     return children;
   }
+
+  function ScrollToTop() {
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [pathname]);
+
+    return null;
+  }
+
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -96,6 +110,7 @@ function App() {
       <UserProvider>
         <Router>
           {isLoggedIn ? <UserNavbar /> : <Navigation />}
+          <ScrollToTop />
           <Routes>
             <Route path="/" exact Component={Home} />
             <Route path="/about" Component={About} />
@@ -119,7 +134,17 @@ function App() {
               }
             />
             <Route path="/not-found" Component={NotFound} />
-            <Route path="/payment-success" Component={PaymentSuccess} />
+
+            <Route path="/payment-cancel" Component={PaymentCancel} />
+            <Route
+              path="/payment-success"
+              element={
+                <ProtectedRoute>
+                  <PaymentSuccess />
+                </ProtectedRoute>
+              }
+            />
+
           </Routes>
           <Footer />
         </Router>
