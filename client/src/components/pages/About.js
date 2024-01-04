@@ -1,10 +1,11 @@
 import React from "react";
-import "../css/About.css"; 
+import "../css/About.css";
 
 const About = () => {
   return (
+    <div className="bout-con">
       <div className="about-us">
-        <h1 className="title">ABOUT CINEMAGIC</h1>
+        <div className="border-title"><h1 className="title">ABOUT CINEMAGIC</h1></div>
         <p className="description">
           Cinemagic stands as a beacon of innovation in Sri Lanka's cinematic
           landscape, dedicated to elevating the movie-going experience to
@@ -24,7 +25,7 @@ const About = () => {
         <div className="vision-mission">
           <div className="vision">
             <h2>VISION</h2>
-            <p>
+            <p className="border-para">
               Cinemagic envisions becoming the pioneer of a revolutionary
               cinematic journey in Sri Lanka, transcending traditional movie
               experiences to offer a multi-sensory escapade.{" "}
@@ -32,7 +33,7 @@ const About = () => {
           </div>
           <div className="mission">
             <h2>MISSION</h2>
-            <p>
+            <p className="border-para">
               Our mission is to curate a cinematic haven where the magic of
               movies is alive in every detail. At Cinemagic, we are committed to
               delivering a diverse array of world-class filmic experiences.
@@ -40,6 +41,7 @@ const About = () => {
           </div>
         </div>
       </div>
+    </div>
   );
 };
 
