@@ -1,0 +1,50 @@
+/* AddBooking.css */
+.add-booking-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 20px;
+
+    /* Dark background */
+}
+
+.add-booking-form {
+    max-width: 500px;
+    margin: auto;
+    padding: 30px 50px;
+    background-color: #444;
+    /* Slightly lighter background for the form */
+
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+}
+
+.add-booking-form h2 {
+    text-align: center;
+    color: #ffd700;
+    /* Theme color for headings */
+}
+
+.add-booking-form input,
+.add-booking-form button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 3px;
+    border: none;
+    background-color: #fff;
+    /* White input background for contrast */
+    color: #333;
+    /* Dark text for readability */
+}
+
+.add-booking-form button {
+    background-color: #ffd700;
+    /* Theme color for button */
+    color: #333;
+    cursor: pointer;
+    font-weight: bold;
+}

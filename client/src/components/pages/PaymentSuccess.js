@@ -5,6 +5,7 @@ import { TailSpin } from "react-loader-spinner";
 import { useLoading } from "../LoadingContext.js";
 
 const PaymentSuccess = () => {
+
   const { loading, setLoading } = useLoading();
 
   useEffect(() => {
