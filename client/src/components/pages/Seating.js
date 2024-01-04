@@ -22,9 +22,6 @@ export default function Seating() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   useEffect(() => {
-    if (!isLoggedIn) {
-      navigate("/login-container");
-    }
     const fetchData = async () => {
       try {
         setLoading(true);
@@ -63,13 +60,21 @@ export default function Seating() {
       // Retrieve the JWT token from localStorage
       const token = localStorage.getItem("token");
       if (!token) {
-        Swal.fire({
-          icon: "error",
-          title: "Unauthorized",
-          text: "You are not logged in.",
+        setLoading(false);
+        const result = await Swal.fire({
+          title: "Unauthorized Access",
+          text: "You need to log in to access this page",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Go to Login",
+          cancelButtonText: "Stay on Page",
         });
-        navigate("/login");
-        return;
+        if (result.isConfirmed) {
+          navigate("/login-container");
+          return;
+        } else {
+          return;
+        }
       }
 
       const bookingResponse = await axios.post(
