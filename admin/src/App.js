@@ -104,7 +104,7 @@ const App = () => {
                 <Routes>
                   <Route path="/movies-view" element={<MovieGrid />} />
                   <Route path="/movies" element={<Movies />} />
-                  <Route path="/UpdateMovie" element={<MovieUpdate />} />
+                  <Route path="/UpdateMovie/:id" element={<MovieUpdate />} />
                   <Route path="/DeleteMovie" element={<DeleteMovieForm />} />
                   <Route path="/add-showtime" element={<AddShowtime />} />
                   <Route path="/update-showtime" element={<UpdateShowtime />} />
