@@ -1,0 +1,63 @@
+/* MovieForm.css */
+.movie-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+
+    /* Dark background */
+
+}
+
+
+
+.movie-form {
+    max-width: 480px;
+    margin: auto;
+    background-color: #444;
+    /* Slightly lighter background for the form */
+    padding: 20px 50px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+}
+
+.movie-form h2 {
+    text-align: center;
+    color: #ffd700;
+    /* Theme color for headings */
+}
+
+.movie-form input,
+.movie-form textarea,
+.movie-form button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 3px;
+    border: none;
+}
+
+.movie-form textarea {
+    height: 100px;
+    resize: vertical;
+    /* Allow vertical resizing */
+}
+
+.movie-form button {
+    background-color: #ffd700;
+    /* Theme color for button */
+    color: #333;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.movie-form .upload-container {
+    margin-bottom: 15px;
+}
+
+.movie-form input[type="file"] {
+    color: #fff;
+}

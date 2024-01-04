@@ -1,0 +1,49 @@
+
+.add-showtime-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    /* background-color: #333; */
+    /* Dark background */
+}
+
+.add-showtime-form {
+
+    max-width: 500px;
+    margin: auto;
+    background-color: #444;
+    /* Slightly lighter background for the form */
+    padding: 20px 50px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+}
+
+.add-showtime-form h2 {
+    text-align: center;
+    color: #ffd700;
+    /* Theme color for headings */
+}
+
+.add-showtime-form input,
+.add-showtime-form button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 3px;
+    border: none;
+    background-color: #fff;
+    /* White input background for contrast */
+    color: #333;
+    /* Dark text for readability */
+}
+
+.add-showtime-form button {
+    background-color: #ffd700;
+    /* Theme color for button */
+    color: #333;
+    cursor: pointer;
+    font-weight: bold;
+}
