@@ -1,36 +1,47 @@
 /* PaymentSuccess.css */
 
 .payment-success-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 90vh;
-    background-color: #fff;
-    /* Green background color */
-    color: grey;
-    /* White text color */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+  background-color: #fff;
+  /* Green background color */
+  color: grey;
+  /* White text color */
 }
 
 .payment-success-text {
-    font-size: 32px;
-    margin-bottom: 16px;
-    color: grey;
+  font-size: 32px;
+  margin-bottom: 16px;
+  color: grey;
 }
 
 .payment-success-message {
-    font-size: 18px;
-    text-align: center;
-    max-width: 400px;
-    padding: 16px;
-    border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.1);
-    /* Transparent white background */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    /* Shadow for the container */
+  font-size: 18px;
+  text-align: center;
+  max-width: 400px;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  /* Transparent white background */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  /* Shadow for the container */
 }
+.main-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+}
+
 
 .yes-img {
     width: 80px;
     margin-top: 12px;
 }
+

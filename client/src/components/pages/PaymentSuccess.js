@@ -18,17 +18,21 @@ const PaymentSuccess = () => {
   }, [setLoading]);
 
   return (
-    <div className={`login-wrapper ${loading ? "blurred" : ""}`}>
-      {loading && (
-        <div className="loader-container">
-          <TailSpin color="#00BFFF" height={100} width={100} />
-        </div>
-      )}
-      <div className="payment-success-container">
-        <h1 className="payment-success-text">Payment Successful!</h1>
-        <p className="payment-success-message">
-          Thank you for your payment. Your transaction was successful.
-        </p>
+    <div className="main-layout">
+      <div className="login-wrapper">
+        {loading && (
+          <div className="loader-container">
+            <TailSpin color="#00BFFF" height={100} width={100} />
+          </div>
+        )}
+        {!loading && ( // Only render this part when not loading
+          <div className="payment-success-container">
+            <h1 className="payment-success-text">Payment Successful!</h1>
+            <p className="payment-success-message">
+              Thank you for your payment. Your transaction was successful.
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
