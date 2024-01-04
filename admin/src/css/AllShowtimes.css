@@ -1,0 +1,124 @@
+.showtime-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.showtime-card {
+    width: calc(25% - 20px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+    margin-bottom: 20px;
+}
+
+.showtime-card:hover {
+    transform: scale(1.05);
+}
+
+.showtime-info {
+    padding: 10px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+}
+
+.showtime-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-bottom: 8px;
+}
+
+.update-btn {
+    background-color: #4caf50;
+    color: white;
+}
+
+.update-btn:hover {
+    background-color: #46a049;
+}
+
+.delete-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #e53935;
+}
+
+.add-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-bottom: 8px;
+    background-color: #4caf50;
+    color: white;
+    margin-right: 5px;
+}
+
+.show-btn {
+    background-color: #2196F3;
+}
+
+.add-showtime-button-container {
+    margin-left: 30px;
+    margin-top: 10px;
+}
+
+.h3-st {
+    font-size: 20px;
+    color: #696969;
+
+}
+
+.h3-st-title {
+    font-size: 20px;
+    padding-left: 10px;
+    color: #696969;
+}
+
+.h3-con {
+    display: flex;
+    background-color: #f5f5f5;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 2px;
+    margin: 10px 0;
+    width: 400px;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 1200px) {
+    .showtime-card {
+        width: calc(33.333% - 20px);
+    }
+}
+
+@media (max-width: 900px) {
+    .showtime-card {
+        width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 600px) {
+    .showtime-card {
+        width: 100%;
+    }
+}

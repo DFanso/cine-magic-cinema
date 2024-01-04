@@ -1,0 +1,55 @@
+/* Sidebar.css */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #333;
+    color: #fff;
+    width: 300px;
+    height: calc(100vh - 65px);
+    padding: 20px;
+    box-sizing: border-box;
+    /* Include padding in the height calculation */
+    overflow: hidden;
+    /* Add scroll only to the sidebar if content overflows */
+}
+
+.sidebar-item {
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    padding: 8px;
+    border-radius: 3px;
+    font-size: 17px;
+    width: 100%;
+    /* Full width within the sidebar */
+    text-align: center;
+    border: 1px solid grey;
+    font-family: 'Roboto', sans-serif;
+    /* Center text horizontally */
+    text-decoration: none;
+    /* Removes underline from links */
+    color: inherit;
+    font-weight: 600;
+}
+
+.sidebar-item:hover {
+    color: #ffd700;
+    /* Highlight color on hover */
+
+    /* Slightly different background on hover */
+}
+
+.sidebar-item-emphasis {
+    font-weight: bold;
+    color: #ffd700;
+}
+
+
+.sidebar-item[data-section='movies']:last-child,
+.sidebar-item[data-section='showtime']:last-child,
+.sidebar-item[data-section='booking']:last-child {
+    margin-bottom: 15px;
+    /* Larger space after each section */
+}
