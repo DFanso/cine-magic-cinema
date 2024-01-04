@@ -13,7 +13,7 @@ const ResetPassword = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
-  const [timeLeft, setTimeLeft] = useState(10);
+  const [timeLeft, setTimeLeft] = useState(300);
   const otpRef = useRef(null);
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
