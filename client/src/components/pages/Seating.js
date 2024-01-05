@@ -45,7 +45,7 @@ export default function Seating() {
   }, [id, showTimeId]);
 
   const handleBooking = async () => {
-    if (bookedSeats.length === 0) {
+    if (selectedSeats.length === 0) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -108,6 +108,7 @@ export default function Seating() {
         title: "Error",
         text: "An error occurred while booking.",
       });
+      setLoading(false);
     }
   };
 
