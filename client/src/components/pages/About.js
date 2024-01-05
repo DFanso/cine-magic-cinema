@@ -1,5 +1,6 @@
 import React from "react";
 import "../css/About.css";
+import Chat from "../Chat";
 
 const About = () => {
   return (
@@ -41,6 +42,7 @@ const About = () => {
           </div>
         </div>
       </div>
+      <Chat />
     </div>
   );
 };

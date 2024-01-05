@@ -7,12 +7,13 @@ import { TailSpin } from "react-loader-spinner";
 import { useLoading } from "../LoadingContext.js";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import Chat from "../Chat";
 
 const MovieFeedbackForm = () => {
   var { id } = useParams();
   const [message, setMessage] = useState("");
   const [rating, setRating] = useState(0);
-  const [hover, setHover] = useState(0); 
+  const [hover, setHover] = useState(0);
 
   const handleFeedbackChange = (event) => {
     setMessage(event.target.value);
@@ -77,7 +78,7 @@ const MovieFeedbackForm = () => {
             onChange={handleFeedbackChange}
             value={message}
           ></textarea>
-           <div className="star-rating">
+          <div className="star-rating">
             {[...Array(5)].map((_, index) => {
               const ratingValue = index + 1;
               return (
@@ -227,6 +228,7 @@ function MoviePage() {
           <MovieFeedbackForm />
         </div>
       )}
+      <Chat />
     </div>
   );
 }

@@ -4,6 +4,7 @@
   padding: 0;
   font-family: 'Cinzel', serif;
 }
+
 .home,
 .about,
 .contact-page {
@@ -15,8 +16,20 @@
   font-size: 100px;
 }
 
-.about-cover, .contact-cover {
+.about-cover,
+.contact-cover {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+
+
+input,
+textarea {
+  font-family: 'Roboto', sans-serif !important;
+}
+
+input:focus {
+  outline: none;
 }
