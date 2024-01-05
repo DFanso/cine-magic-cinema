@@ -3,6 +3,7 @@ import "../../App.css";
 import Section from "../Section";
 import Cards from "../Cards";
 import SliderSection from "../SliderSection";
+import Chat from "../Chat";
 
 function Home() {
   return (
@@ -10,6 +11,7 @@ function Home() {
       <Section />
       <Cards />
       <SliderSection />
+      <Chat />
     </>
   );
 }

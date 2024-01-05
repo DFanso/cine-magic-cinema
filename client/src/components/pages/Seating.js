@@ -8,6 +8,7 @@ import { TailSpin } from "react-loader-spinner";
 import { useLoading } from "../LoadingContext.js";
 import { UserContext } from "../UserContext";
 import Swal from "sweetalert2";
+import Chat from "../Chat";
 
 export default function Seating() {
   const [selectedSeats, setSelectedSeats] = useState([]);
@@ -127,7 +128,7 @@ export default function Seating() {
   const totalPrice = selectedSeats.length * seatPrice;
 
   // Check if userData is empty, and if so, navigate to the login page
-  useEffect(() => {}, [userData, navigate]);
+  useEffect(() => { }, [userData, navigate]);
 
   return (
     <div className="App">
@@ -218,31 +219,35 @@ function Cinema({ bookedSeats, selectedSeats, onSelectedSeatsChange }) {
   }
 
   return (
-    <div className="Cinema">
-      <div className="screen" />
-      <div className="seats">
-        {Array.from({ length: 64 }, (_, i) => i).map((seat) => {
-          const isSelected = selectedSeats.includes(seat);
-          const isBooked = bookedSeats.includes(seat);
-          return (
-            <span
-              tabIndex="0"
-              key={seat}
-              className={clsx(
-                "seat",
-                isSelected && "selected",
-                isBooked && "occupied"
-              )}
-              onClick={!isBooked ? () => handleSelectedState(seat) : null}
-              onKeyPress={
-                !isBooked
-                  ? (e) => e.key === "Enter" && handleSelectedState(seat)
-                  : null
-              }
-            />
-          );
-        })}
+    <div>
+      <div className="Cinema">
+        <div className="screen" />
+        <div className="seats">
+          {Array.from({ length: 64 }, (_, i) => i).map((seat) => {
+            const isSelected = selectedSeats.includes(seat);
+            const isBooked = bookedSeats.includes(seat);
+            return (
+              <span
+                tabIndex="0"
+                key={seat}
+                className={clsx(
+                  "seat",
+                  isSelected && "selected",
+                  isBooked && "occupied"
+                )}
+                onClick={!isBooked ? () => handleSelectedState(seat) : null}
+                onKeyPress={
+                  !isBooked
+                    ? (e) => e.key === "Enter" && handleSelectedState(seat)
+                    : null
+                }
+              />
+            );
+          })}
+        </div>
+
       </div>
+      <Chat />
     </div>
   );
 }

@@ -33,7 +33,7 @@ const Login = () => {
         localStorage.setItem("admin-token", token); // Store the token
         updateUserData(userData); // Update user data in context
         console.log(userData);
-        navigate("/movies-view"); // Navigate to the admin dashboard
+        window.location.reload(); // Navigate to the admin dashboard
       } else {
         Swal.fire({
           title: "Access Denied",
