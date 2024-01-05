@@ -4,6 +4,7 @@ import "../css/Movie.css";
 import uploadToS3 from "./fileUpload_logic/fileUpload_Logic";
 import axios from "axios";
 import Swal from "sweetalert2";
+
 import { TailSpin } from "react-loader-spinner";
 import { useUserContext } from "./auth/UserContext";
 
