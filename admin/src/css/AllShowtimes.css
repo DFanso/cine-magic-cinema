@@ -122,3 +122,42 @@
         width: 100%;
     }
 }
+
+
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.search-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 4px 0 0 4px;
+    /* Rounded left corners */
+    outline: none;
+    width: 250px;
+    /* You can adjust the width as needed */
+}
+
+.search-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4caf50;
+    /* Green background */
+    color: white;
+    /* White text */
+    border: none;
+    border-radius: 0 4px 4px 0;
+    /* Rounded right corners */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-button:hover {
+    background-color: #45a045;
+    /* Slightly darker green on hover */
+}
