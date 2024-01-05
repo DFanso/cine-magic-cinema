@@ -1,16 +1,17 @@
 .user-profile-links {
     width: 100%;
     height: 12vh;
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
 }
 
 .user-profile-links button {
     border: none;
     align-items: center;
     justify-content: center;
-    margin: 0 15px; 
+    margin: 0 15px;
     text-decoration: none;
     color: black;
     font-size: 15px;
@@ -20,19 +21,24 @@
     cursor: pointer;
 }
 
-.user-profile-links button:hover{
+.user-profile-links button:hover {
     transform: scale(0.9);
 
 }
 
 @media screen and (max-width: 480px) {
     .user-profile-links {
-        flex-direction: column; 
-        height: auto; 
+        flex-direction: column;
+        height: auto;
         margin: 0;
     }
 
     .user-profile-links button {
-        margin: 8px 0; 
+        margin: 8px 0;
     }
+}
+
+.user-profile {
+    background-color: #333;
+    color: #fff;
 }
