@@ -128,7 +128,6 @@ const App = () => {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register-page" element={<RegisterPage />} />
-            <Route path="*" element={<Navigate replace to="/login" />} />
           </Routes>
         )}
       </Router>
