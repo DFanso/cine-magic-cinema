@@ -116,16 +116,13 @@ const App = () => {
                     element={<BookingGrid />}
                   />
                   <Route path="/register-page" element={<RegisterPage />} />
-                  <Route
-                    path="/"
-                    element={<Navigate replace to="/movies-view" />}
-                  />
                 </Routes>
               </div>
             </div>
           </div>
         ) : (
           <Routes>
+            <Route path="/" element={<Navigate replace to="/login" />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register-page" element={<RegisterPage />} />
           </Routes>
