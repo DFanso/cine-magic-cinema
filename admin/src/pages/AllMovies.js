@@ -101,6 +101,7 @@ const MovieGrid = () => {
             <button className="btn add-btn">Add Movie</button>
           </Link>
         </Link>
+        <Link to="/chat" className="btn-link"><button className="btn add-btn">Chat</button></Link>
       </div>
       <div className="movie-grid">
         {currentMovies.map((movie, index) => (
