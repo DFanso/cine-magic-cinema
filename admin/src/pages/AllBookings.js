@@ -82,6 +82,17 @@ const BookingGrid = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [refresh, setRefresh] = useState(false);
   const { movieId } = useParams(); // Extract movieId from URL
+  const filteredBookings = searchTerm
+    ? bookings.filter((booking) => {
+        const movieName = booking.movieId.name.toLowerCase();
+        const userName =
+          `${booking.userId.firstName} ${booking.userId.lastName}`.toLowerCase();
+        const searchLower = searchTerm.toLowerCase();
+        return (
+          movieName.includes(searchLower) || userName.includes(searchLower)
+        );
+      })
+    : bookings;
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -140,9 +151,17 @@ const BookingGrid = () => {
         </div>
       </div>
       <div className="showtime-grid">
-        {bookings.map((booking, index) => (
-          <BookingCard key={index} booking={booking} onDelete={handleDelete} />
-        ))}
+        {filteredBookings.length > 0 ? (
+          filteredBookings.map((booking, index) => (
+            <BookingCard
+              key={index}
+              booking={booking}
+              onDelete={handleDelete}
+            />
+          ))
+        ) : (
+          <p>No bookings found.</p>
+        )}
       </div>
     </div>
   );
