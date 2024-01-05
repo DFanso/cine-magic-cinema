@@ -60,6 +60,7 @@ const App = () => {
           });
           localStorage.removeItem("admin-token"); // Optionally remove the token
           setIsLoggedIn(false);
+          return <Navigate to="/movies-view" />;
         }
       } catch (error) {
         console.error("Error fetching admin data:", error);
@@ -80,13 +81,6 @@ const App = () => {
     setIsLoggedIn(true);
   };
 
-  function ProtectedRoute({ children }) {
-    if (!isLoggedIn) {
-      console.log(isLoggedIn);
-      return <Navigate to="/login" />;
-    }
-    return children;
-  }
   return (
     <UserProvider>
       <Router>
@@ -106,15 +100,27 @@ const App = () => {
                   <Route path="/movies" element={<Movies />} />
                   <Route path="/UpdateMovie/:id" element={<MovieUpdate />} />
                   <Route path="/DeleteMovie" element={<DeleteMovieForm />} />
-                  <Route path="/add-showtime" element={<AddShowtime />} />
-                  <Route path="/update-showtime" element={<UpdateShowtime />} />
+                  <Route
+                    path="/add-showtime/:movieId"
+                    element={<AddShowtime />}
+                  />
+                  <Route
+                    path="/update-showtime/:movieId/:showtimeId"
+                    element={<UpdateShowtime />}
+                  />
                   <Route path="/delete-showtime" element={<DeleteShowtime />} />
                   <Route path="/add-booking" element={<AddBooking />} />
                   <Route path="/update-booking" element={<UpdateBooking />} />
                   <Route path="/delete-booking" element={<DeleteBooking />} />
                   <Route path="/chat" element={<Chat />} />
-                  <Route path="/showtime-view" element={<ShowtimeGrid />} />
-                  <Route path="/Booking-view" element={<BookingGrid />} />
+                  <Route
+                    path="/showtime-view/:id/:name"
+                    element={<ShowtimeGrid />}
+                  />
+                  <Route
+                    path="/Booking-view/:movieId/:name"
+                    element={<BookingGrid />}
+                  />
                   <Route path="/register-page" element={<RegisterPage />} />
                   <Route
                     path="/"

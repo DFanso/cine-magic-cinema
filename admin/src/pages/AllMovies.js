@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 const MovieCard = ({ movie, isComingSoon }) => {
   const handleDelete = async (id) => {
     const confirmResult = await Swal.fire({
-      title: "Are you sure?",
+      name: "Are you sure?",
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
@@ -33,18 +33,26 @@ const MovieCard = ({ movie, isComingSoon }) => {
   };
   return (
     <div className="movie-card">
-      <img src={movie.coverImage} alt={movie.title} className="movie-cover" />
+      <img src={movie.coverImage} alt={movie.name} className="movie-cover" />
       <div className="movie-info">
-        <h3>{movie.title}</h3>
+        <h3>{movie.name}</h3>
         {isComingSoon && <p className="coming-soon">Coming Soon</p>}
         <div className="movie-actions">
           <Link to={`/UpdateMovie/${movie._id}`} className="btn-link">
             <button className="new-btn">Update</button>
           </Link>
-          <Link to="/showtime-view" className="btn-link">
+          <Link
+            to={`/showtime-view/${movie._id}/${movie.name}`}
+            className="btn-link"
+          >
             <button className="show-btn">Showtime</button>
           </Link>
-
+          <Link
+            to={`/Booking-view/${movie._id}/${movie.name}`}
+            className="btn-link"
+          >
+            <button className="show-btn">Bookings</button>
+          </Link>
           <button
             className="new-btn-del"
             onClick={() => handleDelete(movie._id)}
