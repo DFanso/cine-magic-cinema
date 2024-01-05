@@ -43,7 +43,7 @@ function BookingHistory() {
         </div>
       )}
       <div className="booking-history">
-        <h1>Booking History</h1>
+        <h1 className="book-h">Booking History</h1>
         <div className="booking-form-group-title">
           <p>Date</p>
           <p>Time</p>
