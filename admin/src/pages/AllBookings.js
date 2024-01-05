@@ -80,34 +80,40 @@ const BookingCard = ({ booking, onDelete }) => {
 const BookingGrid = () => {
   const [bookings, setBookings] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const { movieId: movieId } = useParams(); // Extract movieId from URL
+  const [refresh, setRefresh] = useState(false);
+  const { movieId } = useParams(); // Extract movieId from URL
 
   useEffect(() => {
     const fetchBookings = async () => {
-      const token = localStorage.getItem("admin-token"); // Retrieve JWT token from local storage
-      const response = await fetch(
-        `${process.env.REACT_APP_API_PATH}/booking/movie/${movieId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const token = localStorage.getItem("admin-token");
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_API_PATH}/booking/movie/${movieId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
-      if (response.ok) {
+        if (response.status !== 200) {
+          throw new Error("Error fetching bookings");
+        }
         const data = await response.json();
-        setBookings(data); // Set the bookings state with the fetched data
-      } else {
-        // Handle errors here
+        setBookings(data);
+      } catch (error) {
+        Swal.fire("Error", error.message, "error");
       }
     };
 
     fetchBookings();
-  }, [movieId]);
-
+  }, [movieId, refresh]); // Add refresh as a dependency
   const handleSearch = (event) => {
     event.preventDefault();
     console.log("Searching for:", searchTerm);
+  };
+  const handleDelete = (deletedId) => {
+    setRefresh((prev) => !prev); // Toggle refresh to trigger re-fetch
   };
 
   return (
@@ -135,7 +141,7 @@ const BookingGrid = () => {
       </div>
       <div className="showtime-grid">
         {bookings.map((booking, index) => (
-          <BookingCard key={index} booking={booking} />
+          <BookingCard key={index} booking={booking} onDelete={handleDelete} />
         ))}
       </div>
     </div>
