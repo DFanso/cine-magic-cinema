@@ -31,55 +31,49 @@ import { UserContext } from "./pages/auth/UserContext"; // Import UserContext
 import { UserProvider } from "./pages/auth/UserContext";
 
 const App = () => {
-  const { updateUserData } = useContext(UserContext); // Use updateUserData from UserContext
+  const { userData, updateUserData } = useContext(UserContext);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const checkUserLoggedIn = async () => {
-    const token = localStorage.getItem("admin-token"); // Use a different token key for admin
-    if (token) {
-      try {
-        const profileResponse = await axios.get(
-          `${process.env.REACT_APP_API_PATH}/users/profile`, // API endpoint for admin profile
-          {
-            headers: {
-              Authorization: `Bearer ${token}`, // Use the token from localStorage
-            },
-          }
-        );
+  useEffect(() => {
+    const checkUserLoggedIn = async () => {
+      const token = localStorage.getItem("admin-token");
+      if (token) {
+        try {
+          const profileResponse = await axios.get(
+            `${process.env.REACT_APP_API_PATH}/users/profile`,
+            { headers: { Authorization: `Bearer ${token}` } }
+          );
 
-        if (profileResponse.data && profileResponse.data.type === "ADMIN") {
-          updateUserData(profileResponse.data);
-          setIsLoggedIn(true);
-        } else {
-          // Handle non-admin user
+          if (profileResponse.data && profileResponse.data.type === "ADMIN") {
+            updateUserData(profileResponse.data);
+            setIsLoggedIn(true);
+          } else {
+            Swal.fire({
+              title: "Access Denied",
+              text: "You are not authorized to access the admin panel.",
+              icon: "error",
+              confirmButtonText: "OK",
+            });
+            localStorage.removeItem("admin-token");
+            setIsLoggedIn(false);
+          }
+        } catch (error) {
+          console.error("Error fetching admin data:", error);
           Swal.fire({
-            title: "Access Denied",
-            text: "You are not authorized to access the admin panel.",
+            title: "Error",
+            text: "An error occurred while fetching user data.",
             icon: "error",
             confirmButtonText: "OK",
           });
-          localStorage.removeItem("admin-token"); // Optionally remove the token
           setIsLoggedIn(false);
-          return <Navigate to="/movies-view" />;
         }
-      } catch (error) {
-        console.error("Error fetching admin data:", error);
-        Swal.fire({
-          title: "Error",
-          text: "An error occurred while fetching user data.",
-          icon: "error",
-          confirmButtonText: "OK",
-        });
+      } else {
+        setIsLoggedIn(false);
       }
-    }
-  };
-  useEffect(() => {
-    checkUserLoggedIn();
-  }, []);
+    };
 
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
+    checkUserLoggedIn();
+  }, [updateUserData]); // Removed isLoggedIn from dependency array
 
   return (
     <UserProvider>
@@ -122,19 +116,15 @@ const App = () => {
                     element={<BookingGrid />}
                   />
                   <Route path="/register-page" element={<RegisterPage />} />
-                  <Route
-                    path="/"
-                    element={<Navigate replace to="/movies-view" />}
-                  />
                 </Routes>
               </div>
             </div>
           </div>
         ) : (
           <Routes>
-            <Route path="/login" element={<Login onLogin={handleLogin} />} />
+            <Route path="/" element={<Navigate replace to="/login" />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/register-page" element={<RegisterPage />} />
-            <Route path="*" element={<Navigate replace to="/login" />} />
           </Routes>
         )}
       </Router>
