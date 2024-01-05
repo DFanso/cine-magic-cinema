@@ -24,7 +24,7 @@ const BookingCard = ({ booking, onDelete }) => {
 
     if (result.isConfirmed) {
       try {
-        const token = localStorage.getItem("admin-token"); // Retrieve JWT token from local storage
+        const token = localStorage.getItem("admin-token");
         const response = await fetch(
           `${process.env.REACT_APP_API_PATH}/booking/${booking._id}`,
           {
@@ -35,18 +35,14 @@ const BookingCard = ({ booking, onDelete }) => {
           }
         );
 
-        if (response.ok) {
-          onDelete(booking._id); // Call onDelete prop function
-          Swal.fire("Deleted!", "The booking has been deleted.", "success");
-        } else {
+        if (response.status !== 204) {
           throw new Error("Failed to delete the booking.");
         }
+
+        onDelete(booking._id); // Trigger refresh in parent component
+        Swal.fire("Deleted!", "The booking has been deleted.", "success");
       } catch (error) {
-        Swal.fire(
-          "Error",
-          "There was a problem deleting the booking.",
-          "error"
-        );
+        Swal.fire("Error", error.message, "error");
       }
     }
   };
