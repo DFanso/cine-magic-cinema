@@ -38,7 +38,7 @@ function UserInformationComponent() {
   return (
     <div className="user-information">
       <form>
-        <h1>User Profile</h1>
+        <h1 className="prof-h">User Profile</h1>
         <div className="form-group">
           <label htmlFor="firstName">First Name</label>
           <p>{userData.firstName || "First name not set"}</p>
