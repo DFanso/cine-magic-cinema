@@ -64,7 +64,10 @@ const BookingCard = ({ booking, onDelete }) => {
         </p>
         <p>Total Price: ${totalPrice}</p>
         <div className="booking-actions">
-          <Link to={`/update-booking/${booking._id}`} className="btn-link">
+          <Link
+            to={`/update-booking/${booking._id}/${movieId._id}`}
+            className="btn-link"
+          >
             <button className="btn update-btn">Update</button>
           </Link>
 

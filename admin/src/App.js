@@ -105,7 +105,7 @@ const App = () => {
                   <Route path="/delete-showtime" element={<DeleteShowtime />} />
                   <Route path="/add-booking" element={<AddBooking />} />
                   <Route
-                    path="/update-booking/:id"
+                    path="/update-booking/:id/:movieId"
                     element={<UpdateBooking />}
                   />
                   <Route
