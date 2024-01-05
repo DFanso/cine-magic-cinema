@@ -104,8 +104,14 @@ const App = () => {
                   />
                   <Route path="/delete-showtime" element={<DeleteShowtime />} />
                   <Route path="/add-booking" element={<AddBooking />} />
-                  <Route path="/update-booking" element={<UpdateBooking />} />
-                  <Route path="/delete-booking" element={<DeleteBooking />} />
+                  <Route
+                    path="/update-booking/:id"
+                    element={<UpdateBooking />}
+                  />
+                  <Route
+                    path="/delete-booking/:id"
+                    element={<DeleteBooking />}
+                  />
                   <Route path="/chat" element={<Chat />} />
                   <Route
                     path="/showtime-view/:id/:name"
