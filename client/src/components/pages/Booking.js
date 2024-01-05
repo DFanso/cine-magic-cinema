@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useLoading } from "../LoadingContext.js";
 import { TailSpin } from "react-loader-spinner";
+import Chat from "../Chat";
 
 const Booking = () => {
   const { id } = useParams();
@@ -127,6 +128,7 @@ const Booking = () => {
           </div>
         </>
       )}
+      <Chat />
     </div>
   );
 };

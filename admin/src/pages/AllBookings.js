@@ -1,5 +1,5 @@
-import React from 'react';
-import '../css/AllShowtimes.css'; // Ensure you have a separate CSS file for showtimes
+import React, { useState } from 'react';
+import '../css/AllShowtimes.css';
 import { Link } from 'react-router-dom';
 
 const showtimes = [
@@ -52,8 +52,6 @@ const BookingCard = ({ showtime }) => {
                     <Link to="/delete-booking" className="btn-link">
                         <button className="btn delete-btn">Delete</button>
                     </Link>
-
-
                 </div>
             </div>
         </div>
@@ -61,14 +59,35 @@ const BookingCard = ({ showtime }) => {
 };
 
 const BookingGrid = () => {
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const handleSearch = (event) => {
+        event.preventDefault();
+        console.log('Searching for:', searchTerm);
+    };
+
     return (
         <div>
             <div className="add-showtime-button-container">
-
                 <Link to="/add-booking" className="btn-link">
                     <button className="btn add-btn">Add Booking</button>
                 </Link>
-                <div className='h3-con'><h3 className='h3-st'>All bookings for</h3><h3 className='h3-st-title'>Wonka</h3></div>
+                <div className='search-container'>
+                    <input
+                        type="text"
+                        className="search-input"
+                        placeholder="Search bookings..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                    <button className="search-button" onClick={handleSearch}>
+                        Search
+                    </button>
+                </div>
+                <div className='h3-con'>
+                    <h3 className='h3-st'>All bookings for</h3>
+                    <h3 className='h3-st-title'>Wonka</h3>
+                </div>
             </div>
             <div className="showtime-grid">
                 {showtimes.map((showtime, index) => (

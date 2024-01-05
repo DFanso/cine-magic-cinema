@@ -5,6 +5,8 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { TailSpin } from "react-loader-spinner";
 import { useLoading } from "../LoadingContext.js";
+import Chat from "../Chat";
+
 const ContactPage = () => {
   const { loading, setLoading } = useLoading();
   const [formData, setFormData] = useState({
@@ -132,6 +134,7 @@ const ContactPage = () => {
           </div>
         </div>
       </div>{" "}
+      <Chat />
     </div>
   );
 };
