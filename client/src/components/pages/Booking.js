@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import "../css/Booking.css";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useLoading } from "../LoadingContext.js";
 import { TailSpin } from "react-loader-spinner";
 import Chat from "../Chat";
-
+import Swal from "sweetalert2";
 const Booking = () => {
   const { id } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
   const [showTimes, setShowTimes] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
   const { loading, setLoading } = useLoading();
-
+  const navigate = useNavigate();
   const convertTo12HourFormat = (time24) => {
     const [hours, minutes] = time24.split(":");
     const hours12 = hours % 12 || 12;
@@ -39,7 +39,16 @@ const Booking = () => {
           setSelectedDate(showTimesResponse.data[0].date);
         }
       } catch (error) {
-        console.error("Error fetching data", error);
+        Swal.fire({
+          title: "Error!",
+          text: "Failed to load movie data.",
+          icon: "error",
+          confirmButtonText: "OK",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate("/"); // Redirect to home page using navigate
+          }
+        });
       }
       setLoading(false);
     };
