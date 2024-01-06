@@ -57,10 +57,14 @@ const Testimonials = (movieId) => {
 
   // StarRating component
   const StarRating = ({ rating }) => {
+    const totalStars = 5;
+
     return (
       <div className="star-rating">
-        {Array.from({ length: rating }, () => (
-          <span className="star">★</span>
+        {[...Array(totalStars)].map((_, index) => (
+          <span key={index} className="star">
+            {index < rating ? "★" : "☆"}
+          </span>
         ))}
       </div>
     );
@@ -73,7 +77,7 @@ const Testimonials = (movieId) => {
           <div key={index} className="testimonial-card">
             <h5 className="testimonial-name">{testimonial.name}</h5>
             <p className="testimonial-quote">{testimonial.quote}</p>
-            <StarRating rating={index < 2 ? 4 : 5} />
+            <StarRating rating={testimonial.rating} />
           </div>
         ))}
       </Slider>
