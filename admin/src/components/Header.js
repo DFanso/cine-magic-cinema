@@ -21,7 +21,7 @@ const Header = () => {
       if (result.isConfirmed) {
         updateUserData({});
         localStorage.removeItem("admin-token");
-        navigate("/login");
+        navigate("/");
       }
     });
   };

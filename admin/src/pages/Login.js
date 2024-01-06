@@ -32,9 +32,10 @@ const Login = () => {
       if (userData && userData.type === "ADMIN") {
         localStorage.setItem("admin-token", token); // Store the token
         updateUserData(userData); // Update user data in context
-        navigate("/");
+
         window.location.reload(); // Navigate to the admin dashboard
       } else {
+        navigate("/");
         Swal.fire({
           title: "Access Denied",
           text: "You are not authorized to access the admin panel.",

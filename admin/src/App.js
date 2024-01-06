@@ -31,7 +31,7 @@ import { UserContext } from "./pages/auth/UserContext"; // Import UserContext
 import { UserProvider } from "./pages/auth/UserContext";
 
 const App = () => {
-  const { userData, updateUserData } = useContext(UserContext);
+  const { updateUserData } = useContext(UserContext);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -104,8 +104,14 @@ const App = () => {
                   />
                   <Route path="/delete-showtime" element={<DeleteShowtime />} />
                   <Route path="/add-booking" element={<AddBooking />} />
-                  <Route path="/update-booking" element={<UpdateBooking />} />
-                  <Route path="/delete-booking" element={<DeleteBooking />} />
+                  <Route
+                    path="/update-booking/:id/:movieId"
+                    element={<UpdateBooking />}
+                  />
+                  <Route
+                    path="/delete-booking/:id"
+                    element={<DeleteBooking />}
+                  />
                   <Route path="/chat" element={<Chat />} />
                   <Route
                     path="/showtime-view/:id/:name"
@@ -116,15 +122,19 @@ const App = () => {
                     element={<BookingGrid />}
                   />
                   <Route path="/register-page" element={<RegisterPage />} />
+                  <Route
+                    path="/"
+                    element={<Navigate replace to="/movies-view" />}
+                  />
                 </Routes>
               </div>
             </div>
           </div>
         ) : (
           <Routes>
-            <Route path="/" element={<Navigate replace to="/login" />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Login />} />
             <Route path="/register-page" element={<RegisterPage />} />
+            <Route path="/movies-view" element={<Navigate replace to="/" />} />
           </Routes>
         )}
       </Router>

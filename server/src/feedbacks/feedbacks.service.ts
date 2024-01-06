@@ -24,6 +24,7 @@ export class FeedbacksService {
           .map((key) => key)
           .join(' '),
       )
+      .populate('userId')
       .exec();
 
     if (feedbacks.length === 0) {
@@ -33,7 +34,7 @@ export class FeedbacksService {
   }
 
   async findOne(id: string): Promise<Feedback> {
-    return this.feedbackModel.findById(id).exec();
+    return this.feedbackModel.findById(id).populate('userId').exec();
   }
 
   async update(

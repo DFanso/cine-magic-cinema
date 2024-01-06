@@ -29,6 +29,22 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: dfanso/cine-magic:latest 
+        build-args: |
+          MONGO_URI=${{ secrets.MONGO_URI }}
+          JWT_SECRET=${{ secrets.JWT_SECRET }}
+          GMAIL_USER=${{ secrets.GMAIL_USER }}
+          GMAIL_PASS=${{ secrets.GMAIL_PASS }}
+          EMAIL_FROM_ADDRESS=${{ secrets.EMAIL_FROM_ADDRESS }}
+          PAYPAL_CLIENT_SECRET=${{ secrets.PAYPAL_CLIENT_SECRET }}
+          PAYPAL_CLIENT_ID=${{ secrets.PAYPAL_CLIENT_ID }}
+          WEBHOOK_ID=${{ secrets.WEBHOOK_ID }}
+          AWS_REGION=${{ secrets.AWS_REGION }}
+          AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_BUCKET_NAME=${{ secrets.AWS_BUCKET_NAME }}
+          OMDB_API_KEY=${{ secrets.OMDB_API_KEY }}
+          FRONTEND_URL=${{ secrets.FRONTEND_URL }}
+
 
     - name: SSH and Deploy
       uses: appleboy/ssh-action@master

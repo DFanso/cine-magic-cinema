@@ -7,7 +7,7 @@ import {
   IsEnum,
   IsString,
 } from 'class-validator';
-import { PaymentStatus } from 'src/Types/booking.types';
+import { PaymentStatus } from '../../Types/booking.types';
 
 export class CreateBookingDto {
   @IsMongoId()

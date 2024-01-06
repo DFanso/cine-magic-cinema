@@ -7,10 +7,10 @@ import {
   IsEnum,
   IsMongoId,
 } from 'class-validator';
-import { User } from 'src/users/entities/user.entity';
-import { Movie } from 'src/movies/entities/movie.entity';
-import { ShowTime } from 'src/show-times/entities/show-time.entity';
-import { PaymentStatus } from 'src/Types/booking.types';
+import { User } from '../../users/entities/user.entity';
+import { Movie } from '../../movies/entities/movie.entity';
+import { ShowTime } from '../../show-times/entities/show-time.entity';
+import { PaymentStatus } from '../../Types/booking.types';
 
 export type BookingDocument = Booking & Document;
 
