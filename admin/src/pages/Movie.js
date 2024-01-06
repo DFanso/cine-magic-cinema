@@ -86,15 +86,18 @@ const MovieForm = () => {
             onChange={(e) => setMovie({ ...movie, trailer: e.target.value })}
           />
           <input
-            type="text"
+            type="date"
             placeholder="Start Date"
             onChange={(e) => setMovie({ ...movie, startDate: e.target.value })}
           />
-          <input
-            type="boolean"
-            placeholder="Now showing(True or False)"
-            onChange={(e) => setMovie({ ...movie, nowShowing: e.target.value })}
-          />
+          <select
+            onChange={(e) =>
+              setMovie({ ...movie, nowShowing: e.target.value === "true" })
+            }
+          >
+            <option value="false">False</option>
+            <option value="true">True</option>
+          </select>
           <div className="upload-container">
             <div className="upload-sec-one">
               <label>Upload Cover Image:</label>

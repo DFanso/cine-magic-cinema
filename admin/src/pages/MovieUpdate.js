@@ -145,8 +145,7 @@ const MovieUpdate = () => {
             onChange={(e) => setMovie({ ...movie, trailer: e.target.value })}
           />
           <input
-            type="text"
-            placeholder="Start Date"
+            type="date"
             value={formatDate(movie.startDate)}
             onChange={(e) => setMovie({ ...movie, startDate: e.target.value })}
           />
@@ -189,7 +188,16 @@ const MovieUpdate = () => {
             onChange={(e) =>
               setMovie({ ...movie, directedBy: e.target.value.split(", ") })
             }
-          />
+          />{" "}
+          <select
+            value={movie.nowShowing}
+            onChange={(e) =>
+              setMovie({ ...movie, nowShowing: e.target.value === "true" })
+            }
+          >
+            <option value="false">False</option>
+            <option value="true">True</option>
+          </select>
           <div className="upload-container">
             <div className="upload-sec-one">
               <label>Upload Cover Image:</label>
