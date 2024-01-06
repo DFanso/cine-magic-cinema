@@ -44,6 +44,7 @@ mongoose.set('debug', (collectionName, methodName, ...methodArgs) => {
         AWS_BUCKET_NAME: Joi.string().required(),
         AWS_ACCESS_KEY_ID: Joi.string().required(),
         AWS_SECRET_ACCESS_KEY: Joi.string().required(),
+        FRONTEND_URL: Joi.string().uri().required(),
       }),
     }),
     MongooseModule.forRoot(

@@ -113,14 +113,41 @@ export class BookingController {
         HttpStatus.UNAUTHORIZED,
       );
     }
-
-    // Assuming the user ID in the context is already a valid MongoDB ObjectId
-    const bookings = await this.bookingService.findAll({
+    const bookings = await this.bookingService.findAllForUser({
       userId: context.user.id,
+      paymentStatus: 'PAID',
     });
 
     if (bookings.length === 0) {
       throw new NotFoundException('No bookings found for the user');
+    }
+
+    return bookings;
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
+  @Get('/movie/:id')
+  @ApiOperation({ summary: 'Get bookings for the authenticated user' })
+  @ApiResponse({ status: HttpStatus.OK, description: 'Bookings found' })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'No bookings found for the user',
+  })
+  async findByMovie(@Param('id') id: string) {
+    const context = this.clsService.get<AppClsStore>();
+    if (!context || !context.user) {
+      throw new HttpException(
+        'Authentication required',
+        HttpStatus.UNAUTHORIZED,
+      );
+    }
+    const bookings = await this.bookingService.findAll({
+      movieId: id,
+    });
+
+    if (bookings.length === 0) {
+      throw new NotFoundException('No bookings found for the Movie');
     }
 
     return bookings;
