@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { useRequestLogging } from './request-logging';
 import { VersioningType } from '@nestjs/common';
+import * as basicAuth from 'express-basic-auth';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -14,6 +15,16 @@ async function bootstrap() {
   app.enableVersioning({
     type: VersioningType.URI,
   });
+
+  app.use(
+    '/api',
+    basicAuth({
+      challenge: true,
+      users: {
+        admin: 'Mark@Cine',
+      },
+    }),
+  );
   const config = new DocumentBuilder()
     .setTitle('Cine Magic API')
     .setDescription('Cine Magic Backend API')
