@@ -72,6 +72,7 @@ export class PaypalController {
           seats: booking.selectedSeats,
           totalPrice: booking.totalPrice,
           movieImageUrl: movie.bannerImage,
+          bookingId: bookingId,
         },
       );
 
