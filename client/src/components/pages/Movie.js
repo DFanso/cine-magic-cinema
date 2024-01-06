@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { FaTicketAlt, FaPlayCircle } from "react-icons/fa";
 import "../css/Movie.css";
 import Testimonial from "../Testimonial-Section.js";
@@ -42,7 +42,7 @@ const MovieFeedbackForm = () => {
       );
 
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        throw response;
       }
 
       // Handle success
@@ -57,16 +57,24 @@ const MovieFeedbackForm = () => {
       setMessage("");
       setRating(0);
     } catch (error) {
-      console.error("Error submitting feedback:", error);
-      Swal.fire({
-        title: "Error!",
-        text: "There was a problem submitting your feedback.",
-        icon: "error",
-        confirmButtonText: "OK",
-      });
+      if (error.status === 404) {
+        Swal.fire({
+          title: "Error!",
+          text: "You have to purchase the movie first!",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+      } else {
+        console.error("Error submitting feedback:", error);
+        Swal.fire({
+          title: "Error!",
+          text: "There was a problem submitting your feedback.",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+      }
     }
   };
-
   return (
     <div className="feedback-section">
       <div className="feedback-container">
@@ -84,9 +92,9 @@ const MovieFeedbackForm = () => {
               return (
                 <span
                   key={index}
-
-                  className={`feedback-star ${ratingValue <= (hover || rating) ? "filled" : "empty"}`}
-
+                  className={`feedback-star ${
+                    ratingValue <= (hover || rating) ? "filled" : "empty"
+                  }`}
                   onMouseEnter={() => setHover(ratingValue)}
                   onMouseLeave={() => setHover(rating)}
                   onClick={() => setRating(ratingValue)}
@@ -109,6 +117,8 @@ function MoviePage() {
   const [movieData, setMovieData] = useState({});
   const [feedbacks, setFeedbacks] = useState([]);
   const { loading, setLoading } = useLoading();
+  const navigate = useNavigate();
+
   var { id } = useParams();
 
   useEffect(() => {
@@ -133,7 +143,16 @@ function MoviePage() {
         const feedbackData = await feedbackResponse.json();
         setFeedbacks(feedbackData);
       } catch (error) {
-        console.error("Error fetching movie data:", error);
+        Swal.fire({
+          title: "Error!",
+          text: "Failed to load movie data.",
+          icon: "error",
+          confirmButtonText: "OK",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate("/"); // Redirect to home page using navigate
+          }
+        });
       } finally {
         setLoading(false);
       }
