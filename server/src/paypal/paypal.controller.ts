@@ -71,7 +71,7 @@ export class PaypalController {
             showTime.endTime,
           seats: booking.selectedSeats,
           totalPrice: booking.totalPrice,
-          movieImageUrl: movie.bannerImage,
+          movieImageUrl: movie.coverImage,
           bookingId: bookingId,
         },
       );
