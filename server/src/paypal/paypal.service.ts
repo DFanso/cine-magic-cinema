@@ -55,8 +55,8 @@ export class PaypalService {
         },
       ],
       application_context: {
-        return_url: 'http://localhost:3000/success',
-        cancel_url: 'http://localhost:3000/cancel',
+        return_url: `${this.configService.get('FRONTEND_URL')}/payment-success`,
+        cancel_url: `${this.configService.get('FRONTEND_URL')}/payment-cancel`,
       },
     });
 
