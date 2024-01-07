@@ -2,14 +2,21 @@
 
 Cine Magic is the backend of a web-based Cinema Ticket Booking System, offering robust server-side logic and API support for the frontend application. This backend system is developed using a variety of cutting-edge technologies and tools to ensure a seamless, efficient, and secure experience for both cinema operators and customers.
 
+## Features
+
+- **Browse Movies**: Users can browse a list of currently showing movies.
+- **View Movie Details**: Users can click on a movie to view its details, including synopsis, cast, and ratings.
+- **View Showtimes**: Users can see available showtimes for a selected movie.
+- **Select Seats**: Users can select their preferred seats for a show.
+- **Book Tickets**: Users can book tickets for one or more seats and proceed to payment.
+- **User Authentication**: Secure user authentication and registration system.
+- **Responsive Design**: The system is responsive for mobile and desktop users.
+
 ## Technologies Used
 
-### Backend Framework
+- **Frontend**: React.js, Redux, HTML5, CSS3
 - **NestJS**: A progressive Node.js framework for building efficient and scalable server-side applications.
 - **Express**: A minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
-
-### Programming Language
-- **Node.js**: A JavaScript runtime built on Chrome's V8 JavaScript engine, ideal for building fast and scalable network applications.
 
 ### Database
 - **MongoDB**: A NoSQL database designed for high performance, high availability, and easy scalability.
@@ -48,3 +55,6 @@ Cine Magic is the backend of a web-based Cinema Ticket Booking System, offering 
 
 ### Version Control
 - **Git**: For tracking changes in the source code during software development.
+
+### Contact
+- If you have any questions or need further assistance, please feel free to contact us.
