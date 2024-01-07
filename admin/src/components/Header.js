@@ -38,7 +38,10 @@ const Header = () => {
         paddingRight: "20px",
       }}
     >
-      <span>CINEMAGIC</span>
+      <a style={{
+        color: "white",
+        textDecoration: "none",
+      }} href="/movies-view"><span>CINEMAGIC</span></a>
       <button
         onClick={handleLogout}
         style={{

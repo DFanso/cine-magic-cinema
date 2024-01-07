@@ -61,20 +61,23 @@ const AddShowtime = () => {
           value={showtimeData.price}
           onChange={handleChange}
         />
+
+        {/* <p className="s-time">E.g. - 12:00</p> */}
         <input
           type="text"
           name="startTime"
-          placeholder="Start Time"
+          placeholder="Start Time E.g. - 12:00"
           value={showtimeData.startTime}
           onChange={handleChange}
         />
         <input
           type="text"
           name="endTime"
-          placeholder="End Time"
+          placeholder="End Time E.g. - 12:00"
           value={showtimeData.endTime}
           onChange={handleChange}
         />
+
         <input
           type="date"
           name="date"
