@@ -29,7 +29,8 @@ const PaymentSuccess = () => {
           <div className="payment-success-container" >
             <h1 className="payment-success-text">Payment Successful!</h1>
             <p className="payment-success-message">
-              Thank you for your payment. Your transaction was successful.
+              Thank you for your payment.Your ticket has been emailed to you. Please check your inbox for all the details regarding your purchase
+              <div className='cancel-icon'><img className='yes-img' src="/images/yes.png" alt="Success Icon"></img></div>
             </p>
           </div>
         )}
