@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
-import { v4 as uuidv4 } from "uuid";
 import "./css/Chat.css";
 
 const API_PATH = process.env.REACT_APP_API_PATH_CHAT || "http://localhost:3000";
-const clientId = uuidv4(); // Generate a unique UUID for the client
+
+// Function to generate a 4-digit code
+const generateFourDigitCode = () => {
+  return Math.floor(1000 + Math.random() * 9000);
+};
+
+const clientId = generateFourDigitCode();
 
 const Chat = () => {
   const [isOpen, setIsOpen] = useState(false);
