@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   padding: 10px;
   margin: 0;
 }
@@ -15,7 +15,7 @@
   width: 70%;
 }
 
-.slick-slide > div {
+.slick-slide>div {
   margin: 0 10px;
 }
 
@@ -60,7 +60,7 @@
   font-size: 0.8rem;
 }
 
-.card-top > img {
+.card-top>img {
   width: 100%;
   height: auto;
   object-fit: cover;
@@ -75,9 +75,11 @@
   .card {
     max-width: 250px;
   }
+
   .card-top h1 {
     font-size: 1.2rem;
   }
+
   .card-bottom h3 {
     font-size: 0.7rem;
   }
@@ -91,6 +93,7 @@
   .card-bottom h3 {
     font-size: 0.6rem;
   }
+
   .card-image {
     width: 100%;
   }
@@ -100,12 +103,15 @@
   .card {
     max-width: 200px;
   }
+
   .card-top h1 {
     font-size: 1rem;
   }
+
   .card-bottom h3 {
     font-size: 0.5rem;
   }
+
   .card-image {
     width: 100%;
   }
