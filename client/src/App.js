@@ -135,7 +135,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route path="/not-found" Component={NotFound} />
+            <Route path="*" Component={NotFound} />
 
             <Route path="/payment-cancel" Component={PaymentCancel} />
             <Route
