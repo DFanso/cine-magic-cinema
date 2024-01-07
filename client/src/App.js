@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { useEffect, useState, useContext } from "react";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
 //BrowserRouter
 import {
@@ -75,30 +75,31 @@ function App() {
     return null;
   }
 
-
   useEffect(() => {
     const fetchUserData = async () => {
-      const token = localStorage.getItem("token");
-      if (token) {
-        console.log(token);
-        try {
-          const profileResponse = await axios.get(
-            `${process.env.REACT_APP_API_PATH}/users/profile`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`, // Use the token from localStorage
-              },
-            }
-          );
-          setUserData(profileResponse.data);
+      if (!userData) {
+        const token = localStorage.getItem("token");
+        if (token) {
+          console.log(token);
+          try {
+            const profileResponse = await axios.get(
+              `${process.env.REACT_APP_API_PATH}/users/profile`,
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`, // Use the token from localStorage
+                },
+              }
+            );
+            setUserData(profileResponse.data);
 
-          // Assuming profileResponse.data contains the user object
-          if (profileResponse.data) {
-            dispatch(login());
-            setIsUserLoggedIn(true); // Set logged in state to true
+            // Assuming profileResponse.data contains the user object
+            if (profileResponse.data) {
+              dispatch(login());
+              setIsUserLoggedIn(true); // Set logged in state to true
+            }
+          } catch (error) {
+            console.error("Error fetching user data:", error);
           }
-        } catch (error) {
-          console.error("Error fetching user data:", error);
         }
       }
     };
@@ -145,7 +146,6 @@ function App() {
                 </ProtectedRoute>
               }
             />
-
           </Routes>
           <Footer />
         </Router>
