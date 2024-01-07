@@ -8,6 +8,7 @@ import { useLoading } from "../LoadingContext.js";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import Chat from "../Chat";
+import { HttpStatusCode } from "axios";
 
 const MovieFeedbackForm = () => {
   var { id } = useParams();
@@ -137,11 +138,11 @@ function MoviePage() {
         const feedbackResponse = await fetch(
           `${process.env.REACT_APP_API_PATH}/feedbacks/movie/${id}`
         );
-        if (!feedbackResponse.ok) {
-          throw new Error(`HTTP error! Status: ${feedbackResponse.status}`);
+        if (feedbackResponse.ok) {
+
+          const feedbackData = await feedbackResponse.json();
+          setFeedbacks(feedbackData);
         }
-        const feedbackData = await feedbackResponse.json();
-        setFeedbacks(feedbackData);
       } catch (error) {
         Swal.fire({
           title: "Error!",
