@@ -82,9 +82,9 @@ const ChatBox = () => {
         ))}
       </div>
       <div className="chat-container">
-        <div className="chat-header">
+        {/* <div className="chat-header">
           Chat with {selectedClient ? `Client ${selectedClient}` : "a client"}
-        </div>
+        </div> */}
         <div className="chat-messages">
           {messages
             .filter((message) => message.clientId === selectedClient)

@@ -89,7 +89,7 @@ const App = () => {
                 height: "calc(100vh - [header-height])",
               }}
             >
-              <Sidebar />
+              {/* <Sidebar /> */}
               <div style={{ flex: 1, padding: "20px" }}>
                 <Routes>
                   <Route path="/movies-view" element={<MovieGrid />} />
