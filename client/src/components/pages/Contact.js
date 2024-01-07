@@ -12,7 +12,7 @@ const ContactPage = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phone: "",
+    mobileNumber: "",
     message: "",
   });
 
@@ -88,11 +88,11 @@ const ContactPage = () => {
                   <label htmlFor="phone">Mobile Number</label>
                   <input
                     type="tel"
-                    id="phone"
+                    id="mobileNumber"
                     placeholder="Enter your phone Ex: 0xxxxxxxxx"
                     required
                     onChange={handleChange}
-                    value={formData.phone}
+                    value={formData.mobileNumber}
                   />
                 </div>
                 <div className="input-group">
