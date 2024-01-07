@@ -4,19 +4,22 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+
 }
 
 .seating-showtime {
     font-size: 1.0em;
-    color: #000;
+    color: #fff;
     font-weight: 200;
     margin: 0;
     padding-right: 10px;
+
+
 }
 
 .seating-movie-title {
     font-size: 1.2em;
-    color: #000;
+    color: #fff;
     font-weight: 200;
     margin: 0;
 }
@@ -27,7 +30,7 @@
     border: 0px solid #d1d1d1;
     background-color: #f6c20a;
     cursor: pointer;
-    color: #fafafa;
+    color: #3B3B3B;
 
 }
 
@@ -46,6 +49,9 @@
     display: flex;
     align-items: center;
     gap: 120px;
+
+    background-color: #333;
+    color: #fff !important;
 
 
 }
