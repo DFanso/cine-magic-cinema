@@ -39,7 +39,16 @@ export default function Seating() {
         setSeatPrice(response.data.price);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching movie data:", error);
+        Swal.fire({
+          title: "Error!",
+          text: "Failed to load movie data.",
+          icon: "error",
+          confirmButtonText: "OK",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate("/"); // Redirect to home page using navigate
+          }
+        });
       }
     };
     fetchData();
@@ -128,7 +137,7 @@ export default function Seating() {
   const totalPrice = selectedSeats.length * seatPrice;
 
   // Check if userData is empty, and if so, navigate to the login page
-  useEffect(() => { }, [userData, navigate]);
+  useEffect(() => {}, [userData, navigate]);
 
   return (
     <div className="App">
@@ -245,7 +254,6 @@ function Cinema({ bookedSeats, selectedSeats, onSelectedSeatsChange }) {
             );
           })}
         </div>
-
       </div>
       <Chat />
     </div>

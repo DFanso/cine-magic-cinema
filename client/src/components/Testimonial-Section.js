@@ -14,21 +14,30 @@ const Testimonials = (movieId) => {
         const response = await axios.get(
           `${process.env.REACT_APP_API_PATH}/feedbacks/movie/${movieId.movieId}`
         );
-        console.log(response);
         const formattedTestimonials = response.data.map((item) => ({
           quote: item.comment,
-          name: `${item.userId.firstName} ${item.userId.lastName}`, // Replace with user's name if available
-          position: "Movie Viewer", // Replace with user's position if available
+          name: `${item.userId.firstName} ${item.userId.lastName}`,
+          position: "Movie Viewer",
           rating: item.rating,
         }));
         setTestimonials(formattedTestimonials);
       } catch (error) {
-        console.error("Error fetching testimonials", error);
+        if (axios.isAxiosError(error) && error.response) {
+          if (error.response.status !== 404) {
+            // Handle all errors except 404
+            console.error("An error occurred:", error);
+          }
+        } else {
+          // Handle non-Axios errors
+          console.error("An error occurred:", error);
+        }
+        // If the error is 404, it will not be caught here
       }
     };
 
     fetchTestimonials();
   }, [movieId.movieId]);
+
   const settings = {
     dots: true,
     infinite: true,
@@ -57,10 +66,14 @@ const Testimonials = (movieId) => {
 
   // StarRating component
   const StarRating = ({ rating }) => {
+    const totalStars = 5;
+
     return (
       <div className="star-rating">
-        {Array.from({ length: rating }, () => (
-          <span className="star">★</span>
+        {[...Array(totalStars)].map((_, index) => (
+          <span key={index} className="star">
+            {index < rating ? "★" : "☆"}
+          </span>
         ))}
       </div>
     );
@@ -73,7 +86,7 @@ const Testimonials = (movieId) => {
           <div key={index} className="testimonial-card">
             <h5 className="testimonial-name">{testimonial.name}</h5>
             <p className="testimonial-quote">{testimonial.quote}</p>
-            <StarRating rating={index < 2 ? 4 : 5} />
+            <StarRating rating={testimonial.rating} />
           </div>
         ))}
       </Slider>

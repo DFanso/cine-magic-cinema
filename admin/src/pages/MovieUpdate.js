@@ -15,6 +15,12 @@ const MovieUpdate = () => {
     year: "",
     trailer: "",
     startDate: "",
+    nowShowing: false,
+    description: "",
+    cast: [],
+    producedBy: [],
+    writtenBy: [],
+    directedBy: [],
   });
 
   const { isLoading, setLoading } = useUserContext();
@@ -105,6 +111,10 @@ const MovieUpdate = () => {
       });
     }
   };
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
 
   return (
     <div className={`login-wrapper ${isLoading ? "blurred" : ""}`}>
@@ -135,11 +145,59 @@ const MovieUpdate = () => {
             onChange={(e) => setMovie({ ...movie, trailer: e.target.value })}
           />
           <input
-            type="text"
-            placeholder="Start Date"
-            value={movie.startDate}
+            type="date"
+            value={formatDate(movie.startDate)}
             onChange={(e) => setMovie({ ...movie, startDate: e.target.value })}
           />
+          <textarea
+            placeholder="Description"
+            value={movie.description}
+            onChange={(e) =>
+              setMovie({ ...movie, description: e.target.value })
+            }
+          />
+          {/* Additional input fields for cast, producedBy, writtenBy, directedBy */}
+          <input
+            type="text"
+            placeholder="Cast (comma separated)"
+            value={movie.cast.join(", ")}
+            onChange={(e) =>
+              setMovie({ ...movie, cast: e.target.value.split(", ") })
+            }
+          />
+          <input
+            type="text"
+            placeholder="Produced By (comma separated)"
+            value={movie.producedBy.join(", ")}
+            onChange={(e) =>
+              setMovie({ ...movie, producedBy: e.target.value.split(", ") })
+            }
+          />
+          <input
+            type="text"
+            placeholder="Written By (comma separated)"
+            value={movie.writtenBy.join(", ")}
+            onChange={(e) =>
+              setMovie({ ...movie, writtenBy: e.target.value.split(", ") })
+            }
+          />
+          <input
+            type="text"
+            placeholder="Directed By (comma separated)"
+            value={movie.directedBy.join(", ")}
+            onChange={(e) =>
+              setMovie({ ...movie, directedBy: e.target.value.split(", ") })
+            }
+          />{" "}
+          <select
+            value={movie.nowShowing}
+            onChange={(e) =>
+              setMovie({ ...movie, nowShowing: e.target.value === "true" })
+            }
+          >
+            <option value="false">False</option>
+            <option value="true">True</option>
+          </select>
           <div className="upload-container">
             <div className="upload-sec-one">
               <label>Upload Cover Image:</label>
