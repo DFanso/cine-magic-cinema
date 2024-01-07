@@ -31,44 +31,46 @@ import { UserContext } from "./pages/auth/UserContext"; // Import UserContext
 import { UserProvider } from "./pages/auth/UserContext";
 
 const App = () => {
-  const { updateUserData } = useContext(UserContext);
+  const { updateUserData, userData } = useContext(UserContext);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const checkUserLoggedIn = async () => {
-      const token = localStorage.getItem("admin-token");
-      if (token) {
-        try {
-          const profileResponse = await axios.get(
-            `${process.env.REACT_APP_API_PATH}/users/profile`,
-            { headers: { Authorization: `Bearer ${token}` } }
-          );
+      if (!userData) {
+        const token = localStorage.getItem("admin-token");
+        if (token) {
+          try {
+            const profileResponse = await axios.get(
+              `${process.env.REACT_APP_API_PATH}/users/profile`,
+              { headers: { Authorization: `Bearer ${token}` } }
+            );
 
-          if (profileResponse.data && profileResponse.data.type === "ADMIN") {
-            updateUserData(profileResponse.data);
-            setIsLoggedIn(true);
-          } else {
+            if (profileResponse.data && profileResponse.data.type === "ADMIN") {
+              updateUserData(profileResponse.data);
+              setIsLoggedIn(true);
+            } else {
+              Swal.fire({
+                title: "Access Denied",
+                text: "You are not authorized to access the admin panel.",
+                icon: "error",
+                confirmButtonText: "OK",
+              });
+              localStorage.removeItem("admin-token");
+              setIsLoggedIn(false);
+            }
+          } catch (error) {
+            console.error("Error fetching admin data:", error);
             Swal.fire({
-              title: "Access Denied",
-              text: "You are not authorized to access the admin panel.",
+              title: "Error",
+              text: "An error occurred while fetching user data.",
               icon: "error",
               confirmButtonText: "OK",
             });
-            localStorage.removeItem("admin-token");
             setIsLoggedIn(false);
           }
-        } catch (error) {
-          console.error("Error fetching admin data:", error);
-          Swal.fire({
-            title: "Error",
-            text: "An error occurred while fetching user data.",
-            icon: "error",
-            confirmButtonText: "OK",
-          });
+        } else {
           setIsLoggedIn(false);
         }
-      } else {
-        setIsLoggedIn(false);
       }
     };
 
