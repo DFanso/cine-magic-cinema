@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/PaymentSucess.css'; // Import your CSS file for styling
+import '../css/PaymentCancel.css'; // Import your CSS file for styling
 
 const PaymentCancel = () => {
     return (
