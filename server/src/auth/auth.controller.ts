@@ -47,6 +47,7 @@ export class AuthController {
   })
   async signUp(@Body() createUserDto: CreateUserDto) {
     try {
+      createUserDto.status = UserStatus.Unverified;
       const user = await this.authService.signUp(createUserDto);
       return { user };
     } catch (error) {

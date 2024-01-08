@@ -15,7 +15,6 @@ export class UsersService {
   ) {}
 
   create(createUserDto: CreateUserDto) {
-    createUserDto.status = UserStatus.Unverified;
     const createdUser = new this.userModel(createUserDto);
     return createdUser.save();
   }
