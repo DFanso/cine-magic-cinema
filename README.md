@@ -14,15 +14,17 @@ Cine Magic is the backend of a web-based Cinema Ticket Booking System, offering 
 
 ## Project Structure
 
-The CINEMAGIC project is organized into two main components:
+The CINEMAGIC project is organized into three main components:
 
 1. **Client:** This is the frontend of the application, providing a user-friendly interface for booking cinema tickets.
 
 2. **Admin:** The admin panel for managing movie listings, showtimes, and user feedback.
 
+3. **Server:** The backend server that handles user authentication, ticket booking, and database operations.
+
 ## Getting Started
 
-To get the "client" and "admin" components into your local machine separately, follow the instructions below.
+To get the "client," "admin," and "server" components into your local machine separately, follow the instructions below.
 
 ### Getting the Client
 
@@ -51,6 +53,24 @@ To get the "client" and "admin" components into your local machine separately, f
 2. Navigate to the "admin" directory:
    ```bash
    cd admin
+
+3. Install dependencies:
+   ```bash
+   npm install
+
+4. Start the admin application:
+   ```bash
+   npm start
+
+### Getting the Server
+
+1. Clone the repository into your local machine:
+   ```bash
+   git clone https://github.com/DFanso/cine-magic-cinema.git
+       
+2. Navigate to the "server" directory:
+   ```bash
+   cd server
 
 3. Install dependencies:
    ```bash
