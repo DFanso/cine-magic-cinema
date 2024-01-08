@@ -61,7 +61,7 @@ const ContactPage = () => {
                 If you wish to contact us via email please fill the following
                 form and we will get in touch with you at the earliest.
               </h2>
-              <form onSubmit={handleSubmit}>
+              <form id="submit" onSubmit={handleSubmit}>
                 <div className="input-group">
                   <label htmlFor="name">Name</label>
                   <input

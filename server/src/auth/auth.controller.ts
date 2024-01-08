@@ -71,6 +71,7 @@ export class AuthController {
   async signUpAdmin(@Body() createUserDto: CreateUserDto) {
     try {
       createUserDto.type = UserType.Admin;
+      createUserDto.status = UserStatus.Verified;
       const user = await this.authService.signUp(createUserDto);
       return { user };
     } catch (error) {

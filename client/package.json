@@ -16,6 +16,8 @@
     "axios": "^1.6.5",
     "base": "^3.0.0",
     "clsx": "^2.0.0",
+    "dotenv": "^16.3.1",
+    "npx": "^10.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",
@@ -25,6 +27,7 @@
     "react-scripts": "^5.0.1",
     "react-slick": "^0.29.0",
     "redux": "^5.0.1",
+    "run": "^1.5.0",
     "slick-carousel": "^1.8.1",
     "socket.io-client": "^4.7.3",
     "sweetalert2": "^11.10.2",
@@ -35,7 +38,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress:open": "dotenv -e .env -- cypress open",
+    "cypress:run": "dotenv -e .env -- cypress run"
   },
   "eslintConfig": {
     "extends": [
@@ -54,5 +59,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cypress": "^13.6.2"
   }
 }

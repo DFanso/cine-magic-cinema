@@ -156,7 +156,7 @@ const Login = () => {
         {isLoginSuccessful ? (
           <LoginSuccessful />
         ) : (
-          <form onSubmit={handleSubmit}>
+          <form id="loginForm" onSubmit={handleSubmit}>
             <h1>LOGIN</h1>
             <div className="input-box">
               <input

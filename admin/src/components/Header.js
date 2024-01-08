@@ -22,6 +22,7 @@ const Header = () => {
         updateUserData({});
         localStorage.removeItem("admin-token");
         navigate("/");
+        window.location.reload();
       }
     });
   };
@@ -38,10 +39,15 @@ const Header = () => {
         paddingRight: "20px",
       }}
     >
-      <a style={{
-        color: "white",
-        textDecoration: "none",
-      }} href="/movies-view"><span>CINEMAGIC</span></a>
+      <a
+        style={{
+          color: "white",
+          textDecoration: "none",
+        }}
+        href="/movies-view"
+      >
+        <span>CINEMAGIC</span>
+      </a>
       <button
         onClick={handleLogout}
         style={{
