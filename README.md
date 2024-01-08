@@ -1,6 +1,6 @@
 # Cine Magic - Cinema Ticket Booking System
 
-Cine Magic is the backend of a web-based Cinema Ticket Booking System, offering robust server-side logic and API support for the frontend application. This backend system is developed using a variety of cutting-edge technologies and tools to ensure a seamless, efficient, and secure experience for both cinema operators and customers.
+Cine Magic is a web-based Cinema Ticket Booking System, offering a seamless and efficient experience for both cinema operators and customers. This web-based application is designed with state-of-the-art frontend and backend systems, utilizing cutting-edge technologies and tools to ensure a robust and secure platform.
 
 ## Features
 
