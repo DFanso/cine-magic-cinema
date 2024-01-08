@@ -1,4 +1,3 @@
-
 .add-showtime-container {
     display: flex;
     justify-content: center;
@@ -46,4 +45,10 @@
     color: #333;
     cursor: pointer;
     font-weight: bold;
+}
+
+.s-time {
+    font-size: 12px;
+    margin: 0;
+    padding-bottom: 5px;
 }

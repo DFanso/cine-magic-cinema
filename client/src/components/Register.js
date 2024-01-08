@@ -162,7 +162,7 @@ const Register = () => {
         {isOtpRequested ? (
           <OtpRequest />
         ) : (
-          <form onSubmit={handleSubmit}>
+          <form id="submitTEST" onSubmit={handleSubmit}>
             <h1>REGISTER</h1>
             <div className="input-box">
               <input

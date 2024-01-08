@@ -8,8 +8,13 @@
     /* 200px left and right padding */
     font-family: Arial, sans-serif;
     gap: 20px;
-    background-color: #FAFAFA;
+    background-color: #333;
+    color: #fff !important;
     /* Add some space between the sections */
+}
+
+.booking-movie-title {
+    color: #fff !important;
 }
 
 .showtimes {
@@ -108,7 +113,7 @@
 }
 
 .cta p {
-    color: #666;
+    color: #C5C5C5 !important;
     margin-bottom: 10px;
 }
 
