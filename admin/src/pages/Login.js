@@ -5,15 +5,19 @@ import Swal from "sweetalert2";
 
 import { UserContext } from "./auth/UserContext";
 
+import { TailSpin } from "react-loader-spinner";
+import { useUserContext } from "./auth/UserContext";
+
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const { updateUserData } = useContext(UserContext); // Use the context to set user data
-
+  const { isLoading, setLoading } = useUserContext();
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      setLoading(true);
       // Authenticate user
       const loginResponse = await axios.post(
         `${process.env.REACT_APP_API_PATH}/auth/signin`,
@@ -32,7 +36,7 @@ const Login = () => {
       if (userData && userData.type === "ADMIN") {
         localStorage.setItem("admin-token", token); // Store the token
         updateUserData(userData); // Update user data in context
-
+        setLoading(false);
         window.location.reload(); // Navigate to the admin dashboard
       } else {
         navigate("/");
@@ -44,6 +48,7 @@ const Login = () => {
         });
       }
     } catch (error) {
+      setLoading(false);
       console.error("Login Error:", error);
       Swal.fire({
         title: "Login Failed",
