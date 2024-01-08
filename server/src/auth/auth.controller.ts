@@ -80,8 +80,6 @@ export class AuthController {
         throw new ConflictException('User Already Exits');
       }
     }
-    const user = await this.authService.signUp(createUserDto);
-    return { user };
   }
 
   @Post('signin')
