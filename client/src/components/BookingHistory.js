@@ -55,7 +55,7 @@ function BookingHistory() {
         {bookings.map((booking, index) => (
           <div className="booking-form-group" key={index}>
             <p className="booking-form-group-data">
-              {new Date(booking.movieId.startDate).toLocaleDateString()}
+              {new Date(booking.showTimeId.date).toLocaleDateString()}
             </p>
             <p className="booking-form-group-data">
               {convertTo12HourFormat(booking.showTimeId.startTime)}
